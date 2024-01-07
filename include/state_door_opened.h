@@ -6,6 +6,13 @@
 
 class StateDoorOpened : public BaseState, public BaseUniqueSingleton<StateDoorOpened>
 {
+public:
+    void purge_state() override;
+    void open_door() override;
+    void cook() override;
+    void close_door() override;
+    void get_ticks() override;
+
 protected:
     StateDoorOpened(): BaseState()
     {
@@ -13,12 +20,7 @@ protected:
         this->description_ = "The microwave door is opened";
     }
 
-public:
-    void purge_state() override;
-    void open_door() override;
-    void cook() override;
-    void close_door() override;
-    void get_ticks() override;
+    friend class BaseUniqueSingleton<StateDoorOpened>;
 };
 
 #endif

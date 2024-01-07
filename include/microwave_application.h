@@ -16,15 +16,6 @@
 
 class MicrowaveApplication : public BaseUniqueSingleton<MicrowaveApplication>
 {
-private:
-    std::string     window_title_;
-    std::string     glsl_version_ = GLSL_VERSION;
-    GLFWwindow      *window_;
-    int             window_width_;
-    int             window_height_;
-
-    static void __glfw_error_callback(int error, const char* description);
-
 public:
     static void     init_opengl(int major, int minor);
     static void     create_window(const std::string &title, int w = 1280, int h = 720);
@@ -37,6 +28,17 @@ public:
     GLFWwindow*     window() const          { return window_; }
     int             window_width() const    { return window_width_; }
     int             window_height() const   { return window_height_; }
+
+private:
+    std::string     window_title_;
+    std::string     glsl_version_ = GLSL_VERSION;
+    GLFWwindow      *window_;
+    int             window_width_;
+    int             window_height_;
+
+    static void __glfw_error_callback(int error, const char* description);
+
+    friend class BaseUniqueSingleton<MicrowaveApplication>;
 };
 
 #endif

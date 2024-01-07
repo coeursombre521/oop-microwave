@@ -24,7 +24,7 @@ public:
             if (tmp == nullptr) {
                 Logger::log("BaseUniqueSingleton", "Creating new unique instance of type %s", typeid(T).name());
 
-                tmp = new_internal();
+                tmp = new T();
 
                 std::atomic_thread_fence(std::memory_order_release);
                 instance__.store(tmp, std::memory_order_relaxed);

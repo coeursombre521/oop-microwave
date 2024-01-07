@@ -9,9 +9,6 @@ class BaseState;
 
 class Context
 {
-private:
-    BaseState   *state__;
-
 public:
     Context(BaseState *state);
     ~Context();
@@ -23,6 +20,9 @@ public:
     void cook();
     void close_door();
     void get_ticks();
+
+private:
+    BaseState   *state__;
 };
 
 #endif

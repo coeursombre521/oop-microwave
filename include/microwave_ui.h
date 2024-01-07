@@ -6,8 +6,6 @@
 
 class MicrowaveUI
 {
-private:
-    Context* context__;
 public:
     MicrowaveUI() {
         this->context__ = new Context(StateDoorClosed::get_instance());
@@ -24,6 +22,9 @@ public:
     void    close_door();
     void    cook();
     void    get_ticks();
+
+private:
+    Context* context__;
 };
 
 #endif

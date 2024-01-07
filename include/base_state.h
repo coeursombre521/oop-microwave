@@ -9,12 +9,6 @@ class Context;
 
 class BaseState
 {
-protected:
-    Context *context_;
-
-    std::string short_name_;
-    std::string description_;
-
 public:
     virtual ~BaseState() {}
 
@@ -31,6 +25,12 @@ public:
 
     std::string get_short_name() const { return this->short_name_; }
     std::string get_description() const { return this->description_; }
+
+protected:
+    Context *context_;
+
+    std::string short_name_;
+    std::string description_;
 };
 
 #endif
