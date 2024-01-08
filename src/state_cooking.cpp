@@ -30,12 +30,3 @@ StateCooking::close_door()
 {
     Logger::log("StateCooking", "The door is already closed because the microwave is cooking");
 }
-
-long double
-StateCooking::get_ticks()
-{
-    long double result = Clock::get_instance()->elapsed_time();
-    Logger::log("StateCooking", "Ticks are %s", std::to_string(result).c_str());
-
-    return result;
-}

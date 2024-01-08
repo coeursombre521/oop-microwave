@@ -30,12 +30,3 @@ StateDoorClosed::close_door()
 {
     Logger::log("StateDoorClosed", "The door is closed already");
 }
-
-long double
-StateDoorClosed::get_ticks()
-{
-    long double result = Clock::get_instance()->elapsed_time();
-    Logger::log("StateCooking", "Ticks are %s", std::to_string(result).c_str());
-
-    return result;
-}

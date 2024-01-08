@@ -1,11 +1,21 @@
 
 #include <clock.h>
 
+Clock::Clock() : start_time__(clock::now()), end_time__(clock::now()), running__(false) {}
+
 void
 Clock::start()
 {
     this->start_time__ = clock::now();
     this->running__ = true;
+}
+
+void
+Clock::update()
+{
+    if (this->running__) {
+        this->end_time__ = clock::now();
+    }
 }
 
 void
@@ -30,4 +40,10 @@ Clock::elapsed_time()
         this->end_time__ = clock::now();
     }
     return std::chrono::duration_cast<duration>(this->end_time__ - this->start_time__).count();
+}
+
+bool
+Clock::running() const
+{
+    return this->running__;
 }

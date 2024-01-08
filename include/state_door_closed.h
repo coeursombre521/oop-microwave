@@ -7,11 +7,10 @@
 class StateDoorClosed : public BaseState, public BaseUniqueSingleton<StateDoorClosed>
 {
 public:
-    void        purge_state() override;
-    void        open_door() override;
-    void        cook() override;
-    void        close_door() override;
-    long double get_ticks() override;
+    void purge_state() override;
+    void open_door() override;
+    void cook() override;
+    void close_door() override;
 
 protected:
     StateDoorClosed()

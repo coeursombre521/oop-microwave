@@ -4,6 +4,31 @@
 #include <imgui.h>
 #include <microwave_ui.h>
 
+MicrowaveUI::MicrowaveUI() {
+    this->clock_context__ = ClockContext::get_instance();
+    this->clock_context__->register_observer(this);
+    this->clock_context__->reset_time();
+    this->clock_context__->start_time();
+
+    this->state_context__ = StateContext::get_instance();
+    this->state_context__->transition_to(StateDoorClosed::get_instance());
+    this->state_context__->register_observer(this);
+
+    this->state_name__ = this->state_context__->get_state_name();
+    this->state_description__ = this->state_context__->get_state_description();
+}
+
+MicrowaveUI::~MicrowaveUI() {
+    this->state_context__->unregister_observer(this);
+    this->state_context__->destroy_instance();
+    this->state_context__ = nullptr;
+
+    this->clock_context__->stop_time();
+    this->clock_context__->unregister_observer(this);
+    this->clock_context__->destroy_instance();
+    this->clock_context__ = nullptr;
+}
+
 void
 MicrowaveUI::render_ui()
 {
@@ -41,44 +66,51 @@ MicrowaveUI::render_ui()
         if (ImGui::Button("Stop cooking", ImVec2(-1.0f, 0.0f))) {
             this->cook_off();
         }
+
+        ImGui::Text("Elapsed time: %Lf", this->elapsed_time__);
     }
     ImGui::End();
 
+    this->clock_context__->update_time();
 }
 
 void
 MicrowaveUI::open_door()
 {
-    this->context__->open_door();
+    this->state_context__->open_door();
 }
 
 void
 MicrowaveUI::close_door()
 {
-    this->context__->close_door();
+    this->state_context__->close_door();
 }
 
 void
 MicrowaveUI::cook_on()
 {
-    this->context__->cook();
+    this->state_context__->cook();
 }
 
 void
 MicrowaveUI::cook_off()
 {
-    this->context__->open_door();
-}
-
-long double
-MicrowaveUI::get_ticks()
-{
-    return this->context__->get_ticks();
+    this->state_context__->open_door();
 }
 
 void
-MicrowaveUI::update()
+MicrowaveUI::update(unsigned int notify_id)
 {
-    this->state_name__ = this->context__->get_state_name();
-    this->state_description__ = this->context__->get_state_description();
+    switch (notify_id)
+    {
+        case CLOCK_CONTEXT_NOTIFY_ID:
+            this->elapsed_time__ = this->clock_context__->get_elapsed_time();
+            break;
+        case STATE_CONTEXT_NOTIFY_ID:
+            this->state_name__ = this->state_context__->get_state_name();
+            this->state_description__ = this->state_context__->get_state_description();
+            break;
+        default:
+            break;
+    }
 }

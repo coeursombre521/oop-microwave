@@ -3,31 +3,30 @@
 
 #include <string>
 
-#include <context.h>
+#include <state_context.h>
 
-class Context;
+class StateContext;
 
 class BaseState
 {
 public:
     virtual ~BaseState() {}
 
-    void set_context(Context *context) {
+    void set_context(StateContext *context) {
         this->context_ = context;
     }
 
     virtual void purge_state() = 0;
 
-    virtual void        open_door() = 0;
-    virtual void        cook() = 0;
-    virtual void        close_door() = 0;
-    virtual long double get_ticks() = 0;
+    virtual void open_door() = 0;
+    virtual void cook() = 0;
+    virtual void close_door() = 0;
 
     std::string get_name() const { return this->name_; }
     std::string get_description() const { return this->description_; }
 
 protected:
-    Context *context_;
+    StateContext *context_;
 
     std::string name_;
     std::string description_;
