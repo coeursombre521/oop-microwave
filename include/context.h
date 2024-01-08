@@ -16,10 +16,13 @@ public:
     void transition_to(BaseState *state);
     void purge_state();
 
-    void open_door();
-    void cook();
-    void close_door();
-    void get_ticks();
+    void        open_door();
+    void        cook();
+    void        close_door();
+    long double get_ticks();
+
+    std::string get_state_short_name() const;
+    std::string get_state_description() const;
 
 private:
     BaseState   *state__;

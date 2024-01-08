@@ -52,8 +52,20 @@ Context::cook()
     this->state__->cook();
 }
 
-void
+long double
 Context::get_ticks()
 {
-    this->state__->get_ticks();
+    return this->state__->get_ticks();
+}
+
+std::string
+Context::get_state_short_name() const
+{
+    return this->state__->get_short_name();
+}
+
+std::string
+Context::get_state_description() const
+{
+    return this->state__->get_description();
 }

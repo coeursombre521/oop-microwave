@@ -4,30 +4,30 @@
 void
 Clock::start()
 {
-    this->__start_time = clock::now();
-    this->__running = true;
+    this->start_time__ = clock::now();
+    this->running__ = true;
 }
 
 void
 Clock::stop()
 {
-    this->__end_time = clock::now();
-    this->__running = false;
+    this->end_time__ = clock::now();
+    this->running__ = false;
 }
 
 void
 Clock::reset()
 {
-    this->__start_time = clock::now();
-    this->__end_time = clock::now();
-    this->__running = false;
+    this->start_time__ = clock::now();
+    this->end_time__ = clock::now();
+    this->running__ = false;
 }
 
 long double
 Clock::elapsed_time()
 {
-    if (this->__running) {
-        this->__end_time = clock::now();
+    if (this->running__) {
+        this->end_time__ = clock::now();
     }
-    return std::chrono::duration_cast<duration>(this->__end_time - this->__start_time).count();
+    return std::chrono::duration_cast<duration>(this->end_time__ - this->start_time__).count();
 }

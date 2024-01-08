@@ -3,6 +3,7 @@
 #include <state_cooking.h>
 #include <state_door_closed.h>
 #include <state_door_opened.h>
+#include <clock.h>
 
 void
 StateCooking::purge_state()
@@ -30,8 +31,11 @@ StateCooking::close_door()
     Logger::log("StateCooking", "The door is already closed because the microwave is cooking");
 }
 
-void
+long double
 StateCooking::get_ticks()
 {
-    Logger::log("StateCooking", "Getting ticks");
+    long double result = Clock::get_instance()->elapsed_time();
+    Logger::log("StateCooking", "Ticks are %s", std::to_string(result).c_str());
+
+    return result;
 }

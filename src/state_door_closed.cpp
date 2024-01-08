@@ -3,6 +3,7 @@
 #include <state_cooking.h>
 #include <state_door_closed.h>
 #include <state_door_opened.h>
+#include <clock.h>
 
 void
 StateDoorClosed::purge_state()
@@ -30,8 +31,11 @@ StateDoorClosed::close_door()
     Logger::log("StateDoorClosed", "The door is closed already");
 }
 
-void
+long double
 StateDoorClosed::get_ticks()
 {
-    Logger::log("StateDoorClosed", "Getting ticks");
+    long double result = Clock::get_instance()->elapsed_time();
+    Logger::log("StateCooking", "Ticks are %s", std::to_string(result).c_str());
+
+    return result;
 }

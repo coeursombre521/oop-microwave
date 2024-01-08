@@ -16,12 +16,13 @@ public:
         this->context__ = nullptr;
     }
 
-    void    render_ui();
+    void        render_ui();
 
-    void    open_door();
-    void    close_door();
-    void    cook();
-    void    get_ticks();
+    void        open_door();
+    void        close_door();
+    void        cook_on();
+    void        cook_off();
+    long double get_ticks();
 
 private:
     Context* context__;

@@ -23,9 +23,9 @@ protected:
     }
 
 private:
-    time_point  __start_time;
-    time_point  __end_time;
-    bool        __running = false;
+    time_point  start_time__;
+    time_point  end_time__;
+    bool        running__ = false;
 
     friend class BaseUniqueSingleton<Clock>;
 };
