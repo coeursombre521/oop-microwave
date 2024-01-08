@@ -4,10 +4,6 @@
 #include <logger.h>
 #include <context.h>
 
-Context::Context(BaseState *state) : state__(state) {
-    this->transition_to(state);
-}
-
 Context::~Context() {
     this->purge_state();
 }
@@ -15,21 +11,26 @@ Context::~Context() {
 void
 Context::transition_to(BaseState *state)
 {
-    Logger::log("Context", "Application is transitioning to BaseState object of type %s", typeid(*state).name());
+    this->purge_state();
     if (this->state__ != nullptr) {
         this->state__ = nullptr;
     }
     this->state__ = state;
     this->state__->set_context(this);
+    this->notify_observers();
+
+    Logger::log("Context", "Application transitioned to BaseState object of type %s", typeid(*state).name());
 }
 
 void
 Context::purge_state()
 {
-    Logger::log("Context", "Purging BaseState object of type %s", typeid(*this->state__).name());
     if (this->state__ == nullptr) {
         return;
     }
+
+    Logger::log("Context", "Purging BaseState object of type %s", typeid(*this->state__).name());
+
     this->state__->purge_state();
     this->state__ = nullptr;
 }
@@ -58,10 +59,30 @@ Context::get_ticks()
     return this->state__->get_ticks();
 }
 
-std::string
-Context::get_state_short_name() const
+void
+Context::register_observer(IObserver *observer)
 {
-    return this->state__->get_short_name();
+    this->observers__.insert(observer);
+}
+
+void
+Context::unregister_observer(IObserver *observer)
+{
+    this->observers__.erase(observer);
+}
+
+void
+Context::notify_observers()
+{
+    for (IObserver *observer : this->observers__) {
+        observer->update();
+    }
+}
+
+std::string
+Context::get_state_name() const
+{
+    return this->state__->get_name();
 }
 
 std::string

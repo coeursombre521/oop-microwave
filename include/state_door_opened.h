@@ -16,7 +16,7 @@ public:
 protected:
     StateDoorOpened(): BaseState()
     {
-        this->short_name_ = "Door Opened";
+        this->name_ = "Door Opened";
         this->description_ = "The microwave door is opened";
     }
 

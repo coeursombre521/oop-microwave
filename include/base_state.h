@@ -23,13 +23,13 @@ public:
     virtual void        close_door() = 0;
     virtual long double get_ticks() = 0;
 
-    std::string get_short_name() const { return this->short_name_; }
+    std::string get_name() const { return this->name_; }
     std::string get_description() const { return this->description_; }
 
 protected:
     Context *context_;
 
-    std::string short_name_;
+    std::string name_;
     std::string description_;
 };
 

@@ -11,14 +11,14 @@ MicrowaveUI::render_ui()
         ImGui::SetWindowSize(ImVec2(250, 300));
 
         ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "State:");
-        ImGui::Text("%s", this->context__->get_state_short_name().c_str());
+        ImGui::Text("%s", this->state_name__.c_str());
 
         ImGui::Dummy(ImVec2(0.0f, 10.0f));
 
         ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "State description:");
 
         ImVec2 description_size = ImVec2(ImGui::GetWindowWidth() - 10.0f, 40.0f);
-        const std::string description = this->context__->get_state_description();
+        const std::string description = this->state_description__;
 
         ImGui::PushTextWrapPos(ImGui::GetCursorPos().x + description_size.x);
         ImGui::Text("%s", description.c_str());
@@ -67,11 +67,18 @@ MicrowaveUI::cook_on()
 void
 MicrowaveUI::cook_off()
 {
-    this->context__->close_door();
+    this->context__->open_door();
 }
 
 long double
 MicrowaveUI::get_ticks()
 {
     return this->context__->get_ticks();
+}
+
+void
+MicrowaveUI::update()
+{
+    this->state_name__ = this->context__->get_state_name();
+    this->state_description__ = this->context__->get_state_description();
 }

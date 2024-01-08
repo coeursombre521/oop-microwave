@@ -16,7 +16,7 @@ public:
 protected:
     StateCooking()
     {
-        this->short_name_ = "Cooking";
+        this->name_ = "Cooking";
         this->description_ = "The microwave is cooking your mancarica";
     }
 

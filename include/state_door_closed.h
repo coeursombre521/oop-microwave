@@ -16,7 +16,7 @@ public:
 protected:
     StateDoorClosed()
     {
-        this->short_name_ = "Door Closed";
+        this->name_ = "Door Closed";
         this->description_ = "The microwave door is closed";
     }
 
