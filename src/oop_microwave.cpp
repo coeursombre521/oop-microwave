@@ -27,6 +27,8 @@ main (void)
             glViewport(0, 0, display_w, display_h);
             glClearColor(0.04, 0.1, 0.23, 1.0);
             glClear(GL_COLOR_BUFFER_BIT);
+
+            ClockContext::get_instance()->update_time();
         }
     );
 

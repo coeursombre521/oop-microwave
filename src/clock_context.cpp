@@ -9,6 +9,7 @@ ClockContext::ClockContext()
 
 ClockContext::~ClockContext() {
     this->clock__.reset();
+    this->observers__.clear();
 }
 
 void

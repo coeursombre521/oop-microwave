@@ -67,11 +67,16 @@ MicrowaveUI::render_ui()
             this->cook_off();
         }
 
-        ImGui::Text("Elapsed time: %Lf", this->elapsed_time__);
+        ImGui::Dummy(ImVec2(0.0f, 10.0f));
+
+        if (this->countdown__ <= 0) {
+            ImGui::Text("Countdown is %d. Not cooking yet.", this->countdown__);
+        }
+        else {
+            ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Countdown is %d. Cooking!", this->countdown__);
+        }
     }
     ImGui::End();
-
-    this->clock_context__->update_time();
 }
 
 void
@@ -105,6 +110,9 @@ MicrowaveUI::update(unsigned int notify_id)
     {
         case CLOCK_CONTEXT_NOTIFY_ID:
             this->elapsed_time__ = this->clock_context__->get_elapsed_time();
+            if (this->elapsed_time__ - this->last_elapsed_time >= 1.0) {
+                this->last_elapsed_time = this->elapsed_time__;
+            }
             break;
         case STATE_CONTEXT_NOTIFY_ID:
             this->state_name__ = this->state_context__->get_state_name();

@@ -3,15 +3,28 @@
 
 #include <logger.h>
 #include <state_context.h>
+#include <state_cooking.h>
+#include <state_door_closed.h>
+#include <state_door_opened.h>
 
 StateContext::~StateContext() {
     this->purge_state();
+    this->observers__.clear();
+
+    if (StateCooking::is_alive()) {
+        StateCooking::destroy_instance();
+    }
+    if (StateDoorClosed::is_alive()) {
+        StateDoorClosed::destroy_instance();
+    }
+    if (StateDoorOpened::is_alive()) {
+        StateDoorOpened::destroy_instance();
+    }
 }
 
 void
 StateContext::transition_to(BaseState *state)
 {
-    this->purge_state();
     if (this->state__ != nullptr) {
         this->state__ = nullptr;
     }
@@ -76,11 +89,11 @@ StateContext::notify_observers()
 std::string
 StateContext::get_state_name() const
 {
-    return (state__ != nullptr) ? this->state__->get_name() : "";
+    return this->state__->get_name();
 }
 
 std::string
 StateContext::get_state_description() const
 {
-    return (state__ != nullptr) ? this->state__->get_description() : "";
+    return this->state__->get_description();
 }
