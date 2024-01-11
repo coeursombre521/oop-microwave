@@ -31,6 +31,8 @@ public:
             }
         }
 
+        alive__ = true;
+
         return tmp;
     }
 
@@ -59,7 +61,11 @@ public:
 
         std::atomic_thread_fence(std::memory_order_release);
         instance__.store(tmp, std::memory_order_relaxed);
+
+        alive__ = false;
     }
+
+    static bool is_alive() { return alive__; }
 
     BaseUniqueSingleton(const BaseUniqueSingleton&) = delete;
     BaseUniqueSingleton& operator=(const BaseUniqueSingleton&) = delete;
@@ -73,6 +79,7 @@ protected:
 private:
     static std::atomic<T*>  instance__;
     static std::mutex       mutex__;
+    static bool             alive__;
 };
 
 template <typename T>
@@ -80,5 +87,8 @@ std::atomic<T*> BaseUniqueSingleton<T>::instance__;
 
 template <typename T>
 std::mutex      BaseUniqueSingleton<T>::mutex__;
+
+template <typename T>
+bool            BaseUniqueSingleton<T>::alive__;
 
 #endif
