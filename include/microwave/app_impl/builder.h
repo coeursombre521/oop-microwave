@@ -33,7 +33,7 @@ public:
 private:
     IApplication *application__;
 
-    GLFWApplication *get_gl_application(IApplication *app);
+    GLFWApplication *get_glfw_app(IApplication *app);
 };
 
 #endif

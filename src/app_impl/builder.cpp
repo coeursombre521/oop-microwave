@@ -1,6 +1,6 @@
 
-#include <microwave/debug/logger.h>
 #include <microwave/app_impl/builder.h>
+#include <microwave/debug/logger.h>
 
 ApplicationBuilder::ApplicationBuilder()
 {
@@ -21,7 +21,7 @@ ApplicationBuilder::create_gl_application()
 {
     reset();
 
-    application__ = new GLApplication();
+    application__ = new GLFWApplication();
 
     Logger::log("ApplicationBuilder", "Created GL application");
 
@@ -69,7 +69,7 @@ ApplicationBuilder::set_glsl_version(const std::string &version)
 {
     if (application__ != nullptr)
     {
-        GLApplication *gl_app = get_gl_application(application__);
+        GLFWApplication *gl_app = get_glfw_app(application__);
         if (gl_app != nullptr) {
             gl_app->set_glsl_version(version);
             Logger::log("ApplicationBuilder", "Set GLSL version to %s", gl_app->get_glsl_version().c_str());
@@ -84,7 +84,7 @@ ApplicationBuilder::set_gl_major(int major)
 {
     if (application__ != nullptr)
     {
-        GLApplication *gl_app = get_gl_application(application__);
+        GLFWApplication *gl_app = get_glfw_app(application__);
         if (gl_app != nullptr) {
             gl_app->set_gl_major(major);
             Logger::log("ApplicationBuilder", "Set GL major version to %d", gl_app->get_gl_major());
@@ -99,10 +99,10 @@ ApplicationBuilder::set_gl_minor(int minor)
 {
     if (application__ != nullptr)
     {
-        GLApplication *gl_app = get_gl_application(application__);
-        if (gl_app != nullptr) {
-            gl_app->set_gl_minor(minor);
-            Logger::log("ApplicationBuilder", "Set GL minor version to %d", gl_app->get_gl_minor());
+        GLFWApplication *glfw_app = get_glfw_app(application__);
+        if (glfw_app != nullptr) {
+            glfw_app->set_gl_minor(minor);
+            Logger::log("ApplicationBuilder", "Set GL minor version to %d", glfw_app->get_gl_minor());
         }
     }
 
@@ -163,12 +163,12 @@ ApplicationBuilder::reset()
     }
 }
 
-GLApplication*
-ApplicationBuilder::get_gl_application(IApplication *app)
+GLFWApplication*
+ApplicationBuilder::get_glfw_app(IApplication *app)
 {
-    if (typeid(*app) == typeid(GLApplication))
+    if (typeid(*app) == typeid(GLFWApplication))
     {
-        return dynamic_cast<GLApplication*>(app);
+        return dynamic_cast<GLFWApplication*>(app);
     }
 
     return nullptr;

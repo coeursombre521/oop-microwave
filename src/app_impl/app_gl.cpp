@@ -1,6 +1,6 @@
 
-#include <microwave/debug/logger.h>
 #include <microwave/app_impl/app_gl.h>
+#include <microwave/debug/logger.h>
 
 GLFWApplication::GLFWApplication()
 {
