@@ -3,7 +3,7 @@
  * Copyright (c) 2024, noir51
  * SPDX-License-Identifier: GPL-3.0-or-later
  *
- * File name: microwave/interface/ui.h
+ * Path: microwave/interface/ui.h
  */
 
 #ifndef __INTERFACE_UI_H_

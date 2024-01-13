@@ -3,7 +3,7 @@
  * Copyright (c) 2024, noir51
  * SPDX-License-Identifier: GPL-3.0-or-later
  *
- * File name: microwave/context/countdown.h
+ * Path: microwave/context/countdown.h
  */
 
 #ifndef __CONTEXT_COUNTDOWN_H_

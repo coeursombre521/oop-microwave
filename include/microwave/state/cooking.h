@@ -3,7 +3,7 @@
  * Copyright (c) 2024, noir51
  * SPDX-License-Identifier: GPL-3.0-or-later
  *
- * File name: microwave/state/cooking.h
+ * Path: microwave/state/cooking.h
  */
 
 #ifndef __STATE_COOKING_H_

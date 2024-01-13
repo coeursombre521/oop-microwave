@@ -3,7 +3,7 @@
  * Copyright (c) 2024, noir51
  * SPDX-License-Identifier: GPL-3.0-or-later
  *
- * File name: microwave/app_impl/builder.h
+ * Path: microwave/app_impl/builder.h
  */
 
 #ifndef __APP_IMPL_BUILDER_H_

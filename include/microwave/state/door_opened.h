@@ -3,7 +3,7 @@
  * Copyright (c) 2024, noir51
  * SPDX-License-Identifier: GPL-3.0-or-later
  *
- * File name: microwave/state/door_opened.h
+ * Path: microwave/state/door_opened.h
  */
 
 #ifndef __STATE_DOOR_OPENED_H_
