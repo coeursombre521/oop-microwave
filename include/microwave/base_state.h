@@ -3,8 +3,8 @@
 
 #include <string>
 
-#include <state_context.h>
-#include <microwave_countdown.h>
+#include <microwave/state_context.h>
+#include <microwave/microwave_countdown.h>
 
 class StateContext;
 

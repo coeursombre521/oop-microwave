@@ -1,6 +1,6 @@
 
-#include <logger.h>
-#include <microwave_application_builder.h>
+#include <microwave/logger.h>
+#include <microwave/microwave_application_builder.h>
 
 MicrowaveApplicationBuilder::MicrowaveApplicationBuilder()
 {

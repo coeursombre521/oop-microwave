@@ -1,5 +1,5 @@
 
-#include <clock.h>
+#include <microwave/clock.h>
 
 Clock::Clock() :
     start_time__(clock::now()),

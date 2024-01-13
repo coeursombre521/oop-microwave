@@ -4,8 +4,8 @@
 #include <string>
 #include <typeinfo>
 
-#include <microwave_gl_application.h>
-#include <interface_microwave_application.h>
+#include <microwave/microwave_gl_application.h>
+#include <microwave/interfaces/interface_microwave_application.h>
 
 class MicrowaveApplicationBuilder
 {

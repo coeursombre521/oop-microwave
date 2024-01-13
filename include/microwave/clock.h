@@ -4,9 +4,9 @@
 #include <chrono>
 #include <unordered_set>
 
-#include <base_unique_singleton.h>
-#include <interface_observable.h>
-#include <interface_observer.h>
+#include <microwave/base_unique_singleton.h>
+#include <microwave/interfaces/interface_observable.h>
+#include <microwave/interfaces/interface_observer.h>
 
 class Clock
 {

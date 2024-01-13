@@ -1,9 +1,9 @@
 
-#include <logger.h>
-#include <microwave_application_builder.h>
-#include <interface_microwave_application.h>
-#include <microwave_gl_application.h>
-#include <microwave_ui.h>
+#include <microwave/logger.h>
+#include <microwave/microwave_application_builder.h>
+#include <microwave/interfaces/interface_microwave_application.h>
+#include <microwave/microwave_gl_application.h>
+#include <microwave/microwave_ui.h>
 
 #include <config.h>
 
@@ -31,6 +31,9 @@ main (void)
         .build();
 
     app->main_loop();
+
+    delete app;
+    app = nullptr;
 
     delete ui;
     ui = nullptr;

@@ -4,10 +4,10 @@
 #include <string>
 #include <sstream>
 
-#include <clock_context.h>
-#include <state_context.h>
-#include <interface_microwave_ui.h>
-#include <interface_observer.h>
+#include <microwave/clock_context.h>
+#include <microwave/state_context.h>
+#include <microwave/interfaces/interface_microwave_ui.h>
+#include <microwave/interfaces/interface_observer.h>
 
 static constexpr int MICROWAVE_DEFAULT_COUNTDOWN = 30;
 

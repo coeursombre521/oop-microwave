@@ -1,6 +1,6 @@
 
-#include <logger.h>
-#include <microwave_gl_application.h>
+#include <microwave/logger.h>
+#include <microwave/microwave_gl_application.h>
 
 MicrowaveGLApplication::MicrowaveGLApplication()
 {

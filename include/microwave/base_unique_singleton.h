@@ -6,7 +6,7 @@
 #include <thread>
 #include <typeinfo>
 
-#include <logger.h>
+#include <microwave/logger.h>
 
 template <typename T>
 class BaseUniqueSingleton

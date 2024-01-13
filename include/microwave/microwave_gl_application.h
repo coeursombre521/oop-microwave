@@ -10,8 +10,8 @@
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 
-#include <clock_context.h>
-#include <interface_microwave_application.h>
+#include <microwave/clock_context.h>
+#include <microwave/interfaces/interface_microwave_application.h>
 
 class MicrowaveGLApplication :
     public IMicrowaveApplication

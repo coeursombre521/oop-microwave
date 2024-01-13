@@ -1,7 +1,7 @@
 #ifndef __INTERFACE_OBSERVABLE_H__
 #define __INTERFACE_OBSERVABLE_H__
 
-#include <interface_observer.h>
+#include <microwave/interfaces/interface_observer.h>
 
 class IObservable
 {

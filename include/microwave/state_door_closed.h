@@ -1,8 +1,8 @@
 #ifndef __STATE_DOOR_CLOSED_H_
 #define __STATE_DOOR_CLOSED_H_
 
-#include <base_state.h>
-#include <base_unique_singleton.h>
+#include <microwave/base_state.h>
+#include <microwave/base_unique_singleton.h>
 
 class StateDoorClosed :
     public BaseUniqueSingleton<StateDoorClosed>,

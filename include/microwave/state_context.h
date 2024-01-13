@@ -4,11 +4,11 @@
 #include <string>
 #include <unordered_set>
 
-#include <base_state.h>
-#include <base_unique_singleton.h>
-#include <interface_observable.h>
-#include <interface_observer.h>
-#include <microwave_countdown.h>
+#include <microwave/base_state.h>
+#include <microwave/base_unique_singleton.h>
+#include <microwave/interfaces/interface_observable.h>
+#include <microwave/interfaces/interface_observer.h>
+#include <microwave/microwave_countdown.h>
 
 static constexpr unsigned int STATE_CONTEXT_NOTIFY_ID = 2;
 

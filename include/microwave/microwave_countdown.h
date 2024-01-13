@@ -3,10 +3,10 @@
 
 #include <unordered_set>
 
-#include <logger.h>
-#include <base_unique_singleton.h>
-#include <interface_observable.h>
-#include <interface_observer.h>
+#include <microwave/logger.h>
+#include <microwave/base_unique_singleton.h>
+#include <microwave/interfaces/interface_observable.h>
+#include <microwave/interfaces/interface_observer.h>
 
 static constexpr unsigned int MICROWAVE_COUNTDOWN_NOTIFY_ID = 3;
 

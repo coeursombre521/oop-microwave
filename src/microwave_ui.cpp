@@ -2,8 +2,8 @@
 #include <iostream>
 
 #include <imgui.h>
-#include <microwave_ui.h>
-#include <state_door_closed.h>
+#include <microwave/microwave_ui.h>
+#include <microwave/state_door_closed.h>
 
 MicrowaveUI::MicrowaveUI() {
     clock_context__ = ClockContext::get_instance();

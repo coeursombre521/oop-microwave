@@ -5,9 +5,9 @@
 #include <memory>
 #include <unordered_set>
 
-#include <clock.h>
-#include <interface_observable.h>
-#include <interface_observer.h>
+#include <microwave/clock.h>
+#include <microwave/interfaces/interface_observable.h>
+#include <microwave/interfaces/interface_observer.h>
 
 static constexpr unsigned int CLOCK_CONTEXT_NOTIFY_ID = 1;
 
