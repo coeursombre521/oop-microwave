@@ -10,7 +10,9 @@
 
 static constexpr int MICROWAVE_DEFAULT_COUNTDOWN = 30;
 
-class MicrowaveUI : public IMicrowaveUI, public IObserver
+class MicrowaveUI :
+    public IMicrowaveUI,
+    public IObserver
 {
 public:
     MicrowaveUI();

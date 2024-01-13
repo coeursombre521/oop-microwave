@@ -5,6 +5,12 @@
 #include <state_door_opened.h>
 #include <clock.h>
 
+StateCooking::StateCooking() : BaseState()
+{
+    this->name_ = "StateCooking";
+    this->description_ = "The microwave is cooking mancarica.";
+}
+
 void
 StateCooking::purge_state()
 {

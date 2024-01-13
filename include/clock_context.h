@@ -11,7 +11,9 @@
 
 static constexpr unsigned int CLOCK_CONTEXT_NOTIFY_ID = 1;
 
-class ClockContext : public BaseUniqueSingleton<ClockContext>, public IObservable
+class ClockContext :
+    public BaseUniqueSingleton<ClockContext>,
+    public IObservable
 {
 public:
     void start_time();

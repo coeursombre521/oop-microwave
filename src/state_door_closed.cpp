@@ -5,6 +5,12 @@
 #include <state_door_opened.h>
 #include <clock.h>
 
+StateDoorClosed::StateDoorClosed() : BaseState()
+{
+    this->name_ = "StateDoorClosed";
+    this->description_ = "The microwave door is closed.";
+}
+
 void
 StateDoorClosed::purge_state()
 {

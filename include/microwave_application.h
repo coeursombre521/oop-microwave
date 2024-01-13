@@ -14,7 +14,8 @@
 
 #define GLSL_VERSION "#version 330 core"
 
-class MicrowaveApplication : public BaseUniqueSingleton<MicrowaveApplication>
+class MicrowaveApplication :
+    public BaseUniqueSingleton<MicrowaveApplication>
 {
 public:
     static void init_opengl(int major, int minor);

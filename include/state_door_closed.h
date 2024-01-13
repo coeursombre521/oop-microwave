@@ -4,7 +4,9 @@
 #include <base_state.h>
 #include <base_unique_singleton.h>
 
-class StateDoorClosed : public BaseState, public BaseUniqueSingleton<StateDoorClosed>
+class StateDoorClosed :
+    public BaseUniqueSingleton<StateDoorClosed>,
+    public BaseState
 {
 public:
     void purge_state() override;
@@ -13,11 +15,7 @@ public:
     void close_door() override;
 
 protected:
-    StateDoorClosed()
-    {
-        this->name_ = "Door Closed";
-        this->description_ = "The microwave door is closed";
-    }
+    StateDoorClosed();
 
     friend class BaseUniqueSingleton<StateDoorClosed>;
 };

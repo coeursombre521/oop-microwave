@@ -1,7 +1,11 @@
 
 #include <clock.h>
 
-Clock::Clock() : start_time__(clock::now()), end_time__(clock::now()), running__(false) {}
+Clock::Clock() :
+    start_time__(clock::now()),
+    end_time__(clock::now()),
+    running__(false)
+{}
 
 void
 Clock::start()

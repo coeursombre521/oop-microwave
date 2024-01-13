@@ -7,7 +7,8 @@
 #include <string>
 #include <cstdarg>
 
-class Logger {
+class Logger
+{
 public:
     static void
     log(const char* context, const char* format, ...) {
