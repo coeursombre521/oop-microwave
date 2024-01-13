@@ -1,4 +1,11 @@
 
+/*
+ * Copyright (c) 2024, noir51
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ * File name: app_impl/builder.cpp
+ */
+
 #include <microwave/app_impl/builder.h>
 #include <microwave/debug/logger.h>
 
@@ -173,3 +180,6 @@ ApplicationBuilder::get_glfw_app(IApplication *app)
 
     return nullptr;
 }
+
+/* EOF */
+

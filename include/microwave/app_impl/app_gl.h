@@ -1,4 +1,11 @@
 
+/*
+ * Copyright (c) 2024, noir51
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ * File name: microwave/app_impl/app_gl.h
+ */
+
 #ifndef __APP_IMPL_IMPL_GL_H_
 #define __APP_IMPL_IMPL_GL_H_
 
@@ -75,3 +82,6 @@ private:
 };
 
 #endif
+
+/* EOF */
+

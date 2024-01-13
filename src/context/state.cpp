@@ -1,4 +1,11 @@
 
+/*
+ * Copyright (c) 2024, noir51
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ * File name: context/state.cpp
+ */
+
 #include <typeinfo>
 
 #include <microwave/debug/logger.h>
@@ -109,3 +116,6 @@ StateContext::get_state_description() const
 {
     return state__->get_description();
 }
+
+/* EOF */
+

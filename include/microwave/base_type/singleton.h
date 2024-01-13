@@ -1,3 +1,11 @@
+
+/*
+ * Copyright (c) 2024, noir51
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ * File name: microwave/base_type/singleton.h
+ */
+
 #ifndef __BASE_TYPE_SINGLETON_H_
 #define __BASE_TYPE_SINGLETON_H_
 
@@ -92,3 +100,6 @@ template <typename T>
 std::atomic<bool> BaseSingleton<T>::alive__ = false;
 
 #endif
+
+/* EOF */
+

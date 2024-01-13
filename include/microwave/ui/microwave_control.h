@@ -1,3 +1,11 @@
+
+/*
+ * Copyright (c) 2024, noir51
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ * File name: microwave/ui/microwave_control.h
+ */
+
 #ifndef __UI_MICROWAVE_CONTROL_H_
 #define __UI_MICROWAVE_CONTROL_H_
 
@@ -47,3 +55,6 @@ private:
 };
 
 #endif
+
+/* EOF */
+

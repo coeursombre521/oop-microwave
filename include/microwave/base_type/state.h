@@ -1,3 +1,11 @@
+
+/*
+ * Copyright (c) 2024, noir51
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ * File name: microwave/base_type/state.h
+ */
+
 #ifndef __BASE_TYPE_STATE_H_
 #define __BASE_TYPE_STATE_H_
 
@@ -34,3 +42,6 @@ protected:
 };
 
 #endif
+
+/* EOF */
+

@@ -1,4 +1,11 @@
 
+/*
+ * Copyright (c) 2024, noir51
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ * File name: ui/microwave_control.cpp
+ */
+
 #include <iostream>
 
 #include <imgui/imgui.h>
@@ -151,3 +158,6 @@ MicrowaveControl::get_countdown_notice() const
     }
     return ss.str();
 }
+
+/* EOF */
+

@@ -1,4 +1,11 @@
 
+/*
+ * Copyright (c) 2024, noir51
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ * File name: state/door_opened.cpp
+ */
+
 #include <microwave/context/countdown.h>
 #include <microwave/debug/logger.h>
 #include <microwave/state/cooking.h>
@@ -46,3 +53,6 @@ StateDoorOpened::get_countdown() const
 {
     return countdown_->get_time();
 }
+
+/* EOF */
+

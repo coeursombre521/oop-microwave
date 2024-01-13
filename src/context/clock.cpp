@@ -1,4 +1,11 @@
 
+/*
+ * Copyright (c) 2024, noir51
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ * File name: context/clock.cpp
+ */
+
 #include <microwave/context/clock.h>
 #include <microwave/debug/logger.h>
 
@@ -68,3 +75,6 @@ ClockContext::get_elapsed_time() const
 {
     return clock__->elapsed_time();
 }
+
+/* EOF */
+
