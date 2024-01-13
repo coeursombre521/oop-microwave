@@ -44,11 +44,13 @@ sources = [
     'src/context/clock.cpp',
     'src/context/countdown.cpp',
     'src/context/state.cpp',
+    'src/entity/gl_window.cpp',
     'src/entity/clock.cpp',
     'src/state/cooking.cpp',
     'src/state/door_closed.cpp',
     'src/state/door_opened.cpp',
     'src/ui/microwave_control.cpp',
+    'src/ui/microwave_gl_scene.cpp',
     'src/main.cpp'
 ]
 

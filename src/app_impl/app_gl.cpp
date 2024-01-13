@@ -13,6 +13,7 @@ GLFWApplication::GLFWApplication()
 {
     Logger::log("GLFWApplication", "Creating instance");
     clock_context__ = ClockContext::get_instance();
+    window__ = new GLWindow(nullptr, "", 0, 0);
 }
 
 GLFWApplication::~GLFWApplication()
@@ -25,9 +26,9 @@ void
 GLFWApplication::print_app_info_to_log()
 {
     Logger::log("GLFWApplication", "Application info:");
-    Logger::log("GLFWApplication", "- Window title: %s", window_title__.c_str());
-    Logger::log("GLFWApplication", "- Window width: %d", window_width__);
-    Logger::log("GLFWApplication", "- Window height: %d", window_height__);
+    Logger::log("GLFWApplication", "- Window title: %s", window__->get_window_title().c_str());
+    Logger::log("GLFWApplication", "- Window width: %d", window__->get_window_width());
+    Logger::log("GLFWApplication", "- Window height: %d", window__->get_window_height());
     Logger::log("GLFWApplication", "- OpenGL version: %d.%d", gl_major__, gl_minor__);
     Logger::log("GLFWApplication", "- GLSL version: %s", glsl_version__.c_str());
 }
@@ -77,11 +78,11 @@ GLFWApplication::main_loop()
 
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-        glfwSwapBuffers(window__);
+        glfwSwapBuffers(window__->get_glfw_window());
 
         clock_context__->update_time();
 
-        if (glfwWindowShouldClose(window__)) {
+        if (glfwWindowShouldClose(window__->get_glfw_window())) {
             running__ = false;
         }
 
@@ -91,10 +92,16 @@ GLFWApplication::main_loop()
     }
 }
 
+IWindow*
+GLFWApplication::get_window() const
+{
+    return window__;
+}
+
 std::string
 GLFWApplication::get_window_title() const
 {
-    return window_title__;
+    return window__->get_window_title();
 }
 
 std::string
@@ -106,13 +113,13 @@ GLFWApplication::get_glsl_version() const
 int
 GLFWApplication::get_window_width() const
 {
-    return window_width__;
+    return window__->get_window_width();
 }
 
 int
 GLFWApplication::get_window_height() const
 {
-    return window_height__;
+    return window__->get_window_height();
 }
 
 int
@@ -136,7 +143,7 @@ GLFWApplication::is_running() const
 void
 GLFWApplication::set_window_title(const std::string &title)
 {
-    window_title__ = title;
+    window__->set_window_title(title);
 }
 
 void
@@ -148,13 +155,13 @@ GLFWApplication::set_glsl_version(const std::string &version)
 void
 GLFWApplication::set_window_width(int w)
 {
-    window_width__ = w;
+    window__->set_window_width(w);
 }
 
 void
 GLFWApplication::set_window_height(int h)
 {
-    window_height__ = h;
+    window__->set_window_height(h);
 }
 
 void
@@ -225,26 +232,28 @@ GLFWApplication::init_window()
     Logger::log(
         "GLFWApplication",
         "Creating window",
-        window_title__.c_str(),
-        window_width__,
-        window_height__
+        window__->get_window_title().c_str(),
+        window__->get_window_width(),
+        window__->get_window_height()
     );
 
-    window__ = glfwCreateWindow(
-        window_width__,
-        window_height__,
-        window_title__.c_str(),
+    GLFWwindow *glfw_window = glfwCreateWindow(
+        window__->get_window_width(),
+        window__->get_window_height(),
+        window__->get_window_title().c_str(),
         nullptr,
         nullptr
     );
 
-    if (window__ == nullptr) {
+    if (glfw_window == nullptr) {
         throw std::runtime_error("Failed to create GLFW window");
     }
 
     Logger::log("GLFWApplication", "Window created successfully");
 
-    glfwMakeContextCurrent(window__);
+    glfwMakeContextCurrent(glfw_window);
+
+    window__->set_glfw_window(glfw_window);
 
     print_app_info_to_log();
     print_gpu_info_to_log();
@@ -262,7 +271,7 @@ GLFWApplication::init_imgui()
 
     ImGui::StyleColorsDark();
 
-    ImGui_ImplGlfw_InitForOpenGL(window__, true);
+    ImGui_ImplGlfw_InitForOpenGL(window__->get_glfw_window(), true);
     ImGui_ImplOpenGL3_Init(glsl_version__.c_str());
 
     Logger::log("GLFWApplication", "ImGui initialized successfully");
@@ -279,8 +288,13 @@ GLFWApplication::destroy()
     ImGui::DestroyContext();
 
     Logger::log("GLFWApplication", "Destroying GLFW window");
-    glfwDestroyWindow(window__);
+    glfwDestroyWindow(window__->get_glfw_window());
     glfwTerminate();
+
+    delete window__;
+    window__ = nullptr;
+
+    Logger::log("GLFWApplication", "Application destroyed successfully");
 }
 
 /* EOF */

@@ -9,8 +9,10 @@
 #include <iostream>
 
 #include <imgui/imgui.h>
-#include <microwave/ui/microwave_control.h>
+
+#include <microwave/debug/logger.h>
 #include <microwave/state/door_closed.h>
+#include <microwave/ui/microwave_control.h>
 
 MicrowaveControl::MicrowaveControl() {
     clock_context__ = ClockContext::get_instance();

@@ -18,7 +18,9 @@
 #include <imgui/imgui_impl_opengl3.h>
 
 #include <microwave/context/clock.h>
+#include <microwave/entity/gl_window.h>
 #include <microwave/interface/application.h>
+#include <microwave/interface/window.h>
 
 class GLFWApplication :
     public IApplication
@@ -36,6 +38,7 @@ public:
     void init() override;
     void main_loop() override;
 
+    IWindow *get_window() const override;
     std::string get_window_title() const override;
     std::string get_glsl_version() const;
     int get_window_width() const override;
@@ -60,10 +63,8 @@ public:
     void call_run_callback();
 
 private:
-    std::string window_title__;
+    GLWindow *window__;
     std::string glsl_version__;
-    int window_width__;
-    int window_height__;
     int gl_major__;
     int gl_minor__;
     bool running__ = false;
@@ -71,14 +72,12 @@ private:
     error_callback_t error_callback__;
     run_callback_t run_callback__;
 
+    ClockContext *clock_context__;
+
     void init_glfw();
     void init_window();
     void init_imgui();
     void destroy();
-
-    GLFWwindow *window__;
-
-    ClockContext *clock_context__;
 };
 
 #endif

@@ -12,6 +12,8 @@
 #include <functional>
 #include <string>
 
+#include <microwave/interface/window.h>
+
 class IApplication
 {
 public:
@@ -23,6 +25,7 @@ public:
     virtual void init() = 0;
     virtual void main_loop() = 0;
 
+    virtual IWindow *get_window() const = 0;
     virtual std::string get_window_title() const = 0;
     virtual int get_window_width() const = 0;
     virtual int get_window_height() const = 0;
