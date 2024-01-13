@@ -8,6 +8,7 @@
 #include <base_unique_singleton.h>
 #include <interface_observable.h>
 #include <interface_observer.h>
+#include <microwave_countdown.h>
 
 static constexpr unsigned int STATE_CONTEXT_NOTIFY_ID = 2;
 
@@ -22,8 +23,13 @@ public:
     void purge_state();
 
     void open_door();
-    void cook();
+    void cook(int microwave_time = 30);
     void close_door();
+
+    void start_countdown(int microwave_time);
+    void increase_countdown(int microwave_time);
+    void stop_countdown();
+    void reset_countdown();
 
     void register_observer(IObserver *observer) override;
     void unregister_observer(IObserver *observer) override;
@@ -31,13 +37,16 @@ public:
 
     std::string get_state_name() const;
     std::string get_state_description() const;
+    int get_countdown_time() const;
+    int is_countdown_running() const;
 
 protected:
-    StateContext() { }
+    StateContext();
     ~StateContext();
 
 private:
     BaseState *state__ = nullptr;
+    MicrowaveCountdown *countdown__ = nullptr;
     std::unordered_set<IObserver *> observers__;
 
     friend class BaseUniqueSingleton<StateContext>;

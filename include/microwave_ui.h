@@ -2,6 +2,7 @@
 #define __MICROWAVE_UI_H_
 
 #include <string>
+#include <sstream>
 
 #include <clock_context.h>
 #include <state_context.h>
@@ -28,15 +29,18 @@ public:
     void update(unsigned int notify_id) override;
 
 private:
+    std::string get_countdown_notice() const;
+
     ClockContext* clock_context__;
     StateContext* state_context__;
+    MicrowaveCountdown* microwave_countdown__;
 
     std::string state_name__;
     std::string state_description__;
     long double elapsed_time__ = 0.0;
     long double last_elapsed_time = 0.0;
     int countdown__ = 0;
-    int counter_index__;
+    bool countdown_running__ = false;
 };
 
 #endif

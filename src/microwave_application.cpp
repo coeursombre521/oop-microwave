@@ -121,23 +121,23 @@ MicrowaveApplication::run(std::function<void()> f_ui, std::function<void()> f_op
 std::string
 MicrowaveApplication::window_title() const
 {
-    return this->window_title_;
+    return window_title_;
 }
 
 GLFWwindow*
 MicrowaveApplication::window() const
 {
-    return this->window_;
+    return window_;
 }
 
 int
 MicrowaveApplication::window_width() const
 {
-    return this->window_width_;
+    return window_width_;
 }
 
 int
 MicrowaveApplication::window_height() const
 {
-    return this->window_height_;
+    return window_height_;
 }

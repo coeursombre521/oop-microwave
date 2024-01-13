@@ -17,7 +17,7 @@ public:
     virtual void purge_state() = 0;
 
     virtual void open_door() = 0;
-    virtual void cook() = 0;
+    virtual void cook(int microwave_time = 30) = 0;
     virtual void close_door() = 0;
 
     std::string get_name() const;

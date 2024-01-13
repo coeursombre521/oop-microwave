@@ -7,28 +7,29 @@
 
 StateCooking::StateCooking() : BaseState()
 {
-    this->name_ = "StateCooking";
-    this->description_ = "The microwave is cooking mancarica.";
+    name_ = "StateCooking";
+    description_ = "The microwave is cooking mancarica.";
 }
 
 void
 StateCooking::purge_state()
 {
-    this->destroy_instance();
+    destroy_instance();
 }
 
 void
 StateCooking::open_door()
 {
-    Logger::log("StateCooking", "Whoa! Your mancarica finished cooking too early");
-    this->context_->transition_to(StateDoorOpened::get_instance());
+    Logger::log("StateCooking", "Your mancarica finished cooking");
+    context_->transition_to(StateDoorOpened::get_instance());
+    context_->stop_countdown();
 }
 
 void
-StateCooking::cook()
+StateCooking::cook(int microwave_time)
 {
     Logger::log("StateCooking", "The microwave is cooking mancarica. Cooking MORE!!!");
-    // TODO: cooking more mancarica here
+    context_->increase_countdown(microwave_time);
 }
 
 void

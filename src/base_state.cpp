@@ -4,17 +4,17 @@
 void
 BaseState::set_context(StateContext *context)
 {
-    this->context_ = context;
+    context_ = context;
 }
 
 std::string
 BaseState::get_name() const
 {
-    return this->name_;
+    return name_;
 }
 
 std::string
 BaseState::get_description() const
 {
-    return this->description_;
+    return description_;
 }

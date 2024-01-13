@@ -42,6 +42,7 @@ sources = [
     'src/clock.cpp',
     'src/clock_context.cpp',
     'src/microwave_application.cpp',
+    'src/microwave_countdown.cpp',
     'src/microwave_ui.cpp',
     'src/state_context.cpp',
     'src/state_cooking.cpp',

@@ -7,9 +7,14 @@
 #include <state_door_closed.h>
 #include <state_door_opened.h>
 
+StateContext::StateContext()
+{
+    countdown__ = MicrowaveCountdown::get_instance();
+}
+
 StateContext::~StateContext() {
-    this->purge_state();
-    this->observers__.clear();
+    purge_state();
+    observers__.clear();
 
     if (StateCooking::is_alive()) {
         StateCooking::destroy_instance();
@@ -25,12 +30,12 @@ StateContext::~StateContext() {
 void
 StateContext::transition_to(BaseState *state)
 {
-    if (this->state__ != nullptr) {
-        this->state__ = nullptr;
+    if (state__ != nullptr) {
+        state__ = nullptr;
     }
-    this->state__ = state;
-    this->state__->set_context(this);
-    this->notify_observers();
+    state__ = state;
+    state__->set_context(this);
+    notify_observers();
 
     Logger::log("StateContext", "Application transitioned to BaseState object of type %s", typeid(*state).name());
 }
@@ -38,50 +43,77 @@ StateContext::transition_to(BaseState *state)
 void
 StateContext::purge_state()
 {
-    if (this->state__ == nullptr) {
+    if (state__ == nullptr) {
         return;
     }
 
-    Logger::log("StateContext", "Purging BaseState object of type %s", typeid(*this->state__).name());
+    Logger::log("StateContext", "Purging BaseState object of type %s", typeid(*state__).name());
 
-    this->state__->purge_state();
-    this->state__ = nullptr;
+    state__->purge_state();
+    state__ = nullptr;
 }
 
 void
 StateContext::open_door()
 {
-    this->state__->open_door();
+    state__->open_door();
 }
 
 void
 StateContext::close_door()
 {
-    this->state__->close_door();
+    state__->close_door();
 }
 
 void
-StateContext::cook()
+StateContext::cook(int microwave_time)
 {
-    this->state__->cook();
+    state__->cook(microwave_time);
+}
+
+void
+StateContext::start_countdown(int microwave_time)
+{
+    countdown__->start(microwave_time);
+}
+
+void
+StateContext::increase_countdown(int microwave_time)
+{
+    countdown__->add_time(microwave_time);
+}
+
+void
+StateContext::stop_countdown()
+{
+    countdown__->stop();
+}
+
+void
+StateContext::reset_countdown()
+{
+    countdown__->reset();
 }
 
 void
 StateContext::register_observer(IObserver *observer)
 {
-    this->observers__.insert(observer);
+    observers__.insert(observer);
 }
 
 void
 StateContext::unregister_observer(IObserver *observer)
 {
-    this->observers__.erase(observer);
+    auto it = observers__.find(observer);
+    if (it != observers__.end()) {
+        observers__.erase(observer);
+    }
 }
 
 void
 StateContext::notify_observers()
 {
-    for (IObserver *observer : this->observers__) {
+    for (IObserver *observer : observers__) {
         observer->update(STATE_CONTEXT_NOTIFY_ID);
     }
 }
@@ -89,11 +121,23 @@ StateContext::notify_observers()
 std::string
 StateContext::get_state_name() const
 {
-    return this->state__->get_name();
+    return state__->get_name();
 }
 
 std::string
 StateContext::get_state_description() const
 {
-    return this->state__->get_description();
+    return state__->get_description();
+}
+
+int
+StateContext::get_countdown_time() const
+{
+    return countdown__->get_time();
+}
+
+int
+StateContext::is_countdown_running() const
+{
+    return countdown__->is_running();
 }

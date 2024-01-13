@@ -7,24 +7,25 @@
 
 StateDoorOpened::StateDoorOpened() : BaseState()
 {
-    this->name_ = "StateDoorOpened";
-    this->description_ = "The microwave door is opened.";
+    name_ = "StateDoorOpened";
+    description_ = "The microwave door is opened.";
 }
 
 void
 StateDoorOpened::purge_state()
 {
-    this->destroy_instance();
+    destroy_instance();
 }
 
 void
 StateDoorOpened::open_door()
 {
     Logger::log("StateDoorOpened", "The door is already opened");
+    context_->reset_countdown();
 }
 
 void
-StateDoorOpened::cook()
+StateDoorOpened::cook(int /*microwave_time*/)
 {
     Logger::log("StateDoorOpened", "The microwave has the door opened. Close the door and cook your mancarica");
 }
@@ -33,5 +34,5 @@ void
 StateDoorOpened::close_door()
 {
     Logger::log("StateDoorOpened", "Closing door");
-    this->context_->transition_to(StateDoorClosed::get_instance());
+    context_->transition_to(StateDoorClosed::get_instance());
 }

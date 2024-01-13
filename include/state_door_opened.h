@@ -11,7 +11,7 @@ class StateDoorOpened :
 public:
     void purge_state() override;
     void open_door() override;
-    void cook() override;
+    void cook(int microwave_time) override;
     void close_door() override;
 
 protected:
