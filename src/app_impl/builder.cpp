@@ -21,7 +21,7 @@ ApplicationBuilder::create_gl_application()
 {
     reset();
 
-    application__ = new AppImplGL();
+    application__ = new GLApplication();
 
     Logger::log("ApplicationBuilder", "Created GL application");
 
@@ -69,7 +69,7 @@ ApplicationBuilder::set_glsl_version(const std::string &version)
 {
     if (application__ != nullptr)
     {
-        AppImplGL *gl_app = get_gl_application(application__);
+        GLApplication *gl_app = get_gl_application(application__);
         if (gl_app != nullptr) {
             gl_app->set_glsl_version(version);
             Logger::log("ApplicationBuilder", "Set GLSL version to %s", gl_app->get_glsl_version().c_str());
@@ -84,7 +84,7 @@ ApplicationBuilder::set_gl_major(int major)
 {
     if (application__ != nullptr)
     {
-        AppImplGL *gl_app = get_gl_application(application__);
+        GLApplication *gl_app = get_gl_application(application__);
         if (gl_app != nullptr) {
             gl_app->set_gl_major(major);
             Logger::log("ApplicationBuilder", "Set GL major version to %d", gl_app->get_gl_major());
@@ -99,7 +99,7 @@ ApplicationBuilder::set_gl_minor(int minor)
 {
     if (application__ != nullptr)
     {
-        AppImplGL *gl_app = get_gl_application(application__);
+        GLApplication *gl_app = get_gl_application(application__);
         if (gl_app != nullptr) {
             gl_app->set_gl_minor(minor);
             Logger::log("ApplicationBuilder", "Set GL minor version to %d", gl_app->get_gl_minor());
@@ -163,12 +163,12 @@ ApplicationBuilder::reset()
     }
 }
 
-AppImplGL*
+GLApplication*
 ApplicationBuilder::get_gl_application(IApplication *app)
 {
-    if (typeid(*app) == typeid(AppImplGL))
+    if (typeid(*app) == typeid(GLApplication))
     {
-        return dynamic_cast<AppImplGL*>(app);
+        return dynamic_cast<GLApplication*>(app);
     }
 
     return nullptr;

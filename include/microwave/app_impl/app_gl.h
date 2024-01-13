@@ -13,12 +13,12 @@
 #include <microwave/context/clock.h>
 #include <microwave/interface/application.h>
 
-class AppImplGL :
+class GLFWApplication :
     public IApplication
 {
 public:
-    AppImplGL();
-    ~AppImplGL();
+    GLFWApplication();
+    ~GLFWApplication();
 
     using error_callback_t = void(*)(int, const char *);
     using run_callback_t = std::function<void()>;

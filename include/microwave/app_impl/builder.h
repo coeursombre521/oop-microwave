@@ -4,7 +4,7 @@
 #include <string>
 #include <typeinfo>
 
-#include <microwave/app_impl/impl_gl.h>
+#include <microwave/app_impl/app_gl.h>
 #include <microwave/interface/application.h>
 
 class ApplicationBuilder
@@ -33,7 +33,7 @@ public:
 private:
     IApplication *application__;
 
-    AppImplGL *get_gl_application(IApplication *app);
+    GLFWApplication *get_gl_application(IApplication *app);
 };
 
 #endif

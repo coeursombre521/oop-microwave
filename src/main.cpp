@@ -1,7 +1,7 @@
 
 #include <microwave/debug/logger.h>
 #include <microwave/app_impl/builder.h>
-#include <microwave/app_impl/impl_gl.h>
+#include <microwave/app_impl/app_gl.h>
 #include <microwave/interface/application.h>
 #include <microwave/ui/microwave_control.h>
 
