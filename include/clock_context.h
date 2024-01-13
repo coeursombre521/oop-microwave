@@ -19,9 +19,9 @@ public:
     void reset_time();
     void update_time();
 
-    void register_observer(IObserver *observer);
-    void unregister_observer(IObserver *observer);
-    void notify_observers();
+    void register_observer(IObserver *observer) override;
+    void unregister_observer(IObserver *observer) override;
+    void notify_observers() override;
 
     long double get_elapsed_time() const;
 

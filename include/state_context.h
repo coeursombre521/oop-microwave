@@ -1,5 +1,5 @@
-#ifndef __CONTEXT_H_
-#define __CONTEXT_H_
+#ifndef __STATE_CONTEXT_H_
+#define __STATE_CONTEXT_H_
 
 #include <string>
 #include <unordered_set>
@@ -13,7 +13,9 @@ static constexpr unsigned int STATE_CONTEXT_NOTIFY_ID = 2;
 
 class BaseState;
 
-class StateContext : public BaseUniqueSingleton<StateContext>, public IObservable
+class StateContext :
+    public BaseUniqueSingleton<StateContext>,
+    public IObservable
 {
 public:
     void transition_to(BaseState *state);
@@ -23,9 +25,9 @@ public:
     void cook();
     void close_door();
 
-    void register_observer(IObserver *observer);
-    void unregister_observer(IObserver *observer);
-    void notify_observers();
+    void register_observer(IObserver *observer) override;
+    void unregister_observer(IObserver *observer) override;
+    void notify_observers() override;
 
     std::string get_state_name() const;
     std::string get_state_description() const;
@@ -35,8 +37,8 @@ protected:
     ~StateContext();
 
 private:
-    BaseState                          *state__ = nullptr;
-    std::unordered_set<IObserver *>     observers__;
+    BaseState *state__ = nullptr;
+    std::unordered_set<IObserver *> observers__;
 
     friend class BaseUniqueSingleton<StateContext>;
 };

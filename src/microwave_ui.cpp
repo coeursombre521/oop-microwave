@@ -3,6 +3,7 @@
 
 #include <imgui.h>
 #include <microwave_ui.h>
+#include <state_door_closed.h>
 
 MicrowaveUI::MicrowaveUI() {
     this->clock_context__ = ClockContext::get_instance();
@@ -70,7 +71,7 @@ MicrowaveUI::render_ui()
         ImGui::Dummy(ImVec2(0.0f, 10.0f));
 
         if (this->countdown__ <= 0) {
-            ImGui::Text("Countdown is %d. Not cooking yet.", this->countdown__);
+            ImGui::Text("Countdown is %Lf. Not cooking yet.", this->elapsed_time__);
         }
         else {
             ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Countdown is %d. Cooking!", this->countdown__);

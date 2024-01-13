@@ -117,3 +117,27 @@ MicrowaveApplication::run(std::function<void()> f_ui, std::function<void()> f_op
         glfwSwapBuffers(window);
     }
 }
+
+std::string
+MicrowaveApplication::window_title() const
+{
+    return this->window_title_;
+}
+
+GLFWwindow*
+MicrowaveApplication::window() const
+{
+    return this->window_;
+}
+
+int
+MicrowaveApplication::window_width() const
+{
+    return this->window_width_;
+}
+
+int
+MicrowaveApplication::window_height() const
+{
+    return this->window_height_;
+}

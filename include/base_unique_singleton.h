@@ -1,5 +1,5 @@
-#ifndef __SINGLETON_H_
-#define __SINGLETON_H_
+#ifndef __BASE_UNIQUE_SINGLETON_H_
+#define __BASE_UNIQUE_SINGLETON_H_
 
 #include <atomic>
 #include <mutex>
@@ -31,7 +31,7 @@ public:
             }
         }
 
-        alive__ = true;
+        alive__.store(true, std::memory_order_relaxed);
 
         return tmp;
     }
@@ -62,10 +62,10 @@ public:
         std::atomic_thread_fence(std::memory_order_release);
         instance__.store(tmp, std::memory_order_relaxed);
 
-        alive__ = false;
+        alive__.store(false, std::memory_order_relaxed);
     }
 
-    static bool is_alive() { return alive__; }
+    static bool is_alive() { return alive__.load(std::memory_order_relaxed); }
 
     BaseUniqueSingleton(const BaseUniqueSingleton&) = delete;
     BaseUniqueSingleton& operator=(const BaseUniqueSingleton&) = delete;
@@ -77,18 +77,18 @@ protected:
     ~BaseUniqueSingleton() = default;
 
 private:
-    static std::atomic<T*>  instance__;
-    static std::mutex       mutex__;
-    static bool             alive__;
+    static std::atomic<T*>      instance__;
+    static std::mutex           mutex__;
+    static std::atomic<bool>    alive__;
 };
 
 template <typename T>
-std::atomic<T*> BaseUniqueSingleton<T>::instance__;
+std::atomic<T*> BaseUniqueSingleton<T>::instance__ = nullptr;
 
 template <typename T>
-std::mutex      BaseUniqueSingleton<T>::mutex__;
+std::mutex BaseUniqueSingleton<T>::mutex__;
 
 template <typename T>
-bool            BaseUniqueSingleton<T>::alive__;
+std::atomic<bool> BaseUniqueSingleton<T>::alive__ = false;
 
 #endif

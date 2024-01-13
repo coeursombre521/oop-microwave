@@ -12,9 +12,7 @@ class BaseState
 public:
     virtual ~BaseState() {}
 
-    void set_context(StateContext *context) {
-        this->context_ = context;
-    }
+    void set_context(StateContext *context);
 
     virtual void purge_state() = 0;
 
@@ -22,8 +20,8 @@ public:
     virtual void cook() = 0;
     virtual void close_door() = 0;
 
-    std::string get_name() const { return this->name_; }
-    std::string get_description() const { return this->description_; }
+    std::string get_name() const;
+    std::string get_description() const;
 
 protected:
     StateContext *context_;

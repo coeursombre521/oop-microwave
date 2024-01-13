@@ -33,6 +33,12 @@ Clock::reset()
     this->running__ = false;
 }
 
+bool
+Clock::running() const
+{
+    return this->running__;
+}
+
 long double
 Clock::elapsed_time()
 {
@@ -40,10 +46,4 @@ Clock::elapsed_time()
         this->end_time__ = clock::now();
     }
     return std::chrono::duration_cast<duration>(this->end_time__ - this->start_time__).count();
-}
-
-bool
-Clock::running() const
-{
-    return this->running__;
 }

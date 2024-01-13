@@ -17,17 +17,18 @@ public:
 
     Clock();
 
-    void        start();
-    void        update();
-    void        stop();
-    void        reset();
+    void start();
+    void update();
+    void stop();
+    void reset();
+
+    bool running() const;
     long double elapsed_time();
-    bool        running() const;
 
 private:
-    time_point                      start_time__;
-    time_point                      end_time__;
-    bool                            running__ = false;
+    time_point start_time__;
+    time_point end_time__;
+    bool running__ = false;
 };
 
 #endif
