@@ -8,9 +8,7 @@
 #include <state_door_opened.h>
 
 StateContext::StateContext()
-{
-    countdown__ = MicrowaveCountdown::get_instance();
-}
+{ }
 
 StateContext::~StateContext() {
     purge_state();
@@ -71,28 +69,10 @@ StateContext::cook(int microwave_time)
     state__->cook(microwave_time);
 }
 
-void
-StateContext::start_countdown(int microwave_time)
+int
+StateContext::get_countdown() const
 {
-    countdown__->start(microwave_time);
-}
-
-void
-StateContext::increase_countdown(int microwave_time)
-{
-    countdown__->add_time(microwave_time);
-}
-
-void
-StateContext::stop_countdown()
-{
-    countdown__->stop();
-}
-
-void
-StateContext::reset_countdown()
-{
-    countdown__->reset();
+    return state__->get_countdown();
 }
 
 void
@@ -128,16 +108,4 @@ std::string
 StateContext::get_state_description() const
 {
     return state__->get_description();
-}
-
-int
-StateContext::get_countdown_time() const
-{
-    return countdown__->get_time();
-}
-
-int
-StateContext::is_countdown_running() const
-{
-    return countdown__->is_running();
 }

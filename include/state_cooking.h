@@ -11,8 +11,9 @@ class StateCooking :
 public:
     void purge_state() override;
     void open_door() override;
-    void cook(int microwave_time) override;
+    void cook(int microwave_time = 30) override;
     void close_door() override;
+    int get_countdown() const override;
 
 protected:
     StateCooking();

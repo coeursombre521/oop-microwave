@@ -7,6 +7,7 @@
 
 StateDoorOpened::StateDoorOpened() : BaseState()
 {
+    countdown_ = MicrowaveCountdown::get_instance();
     name_ = "StateDoorOpened";
     description_ = "The microwave door is opened.";
 }
@@ -21,7 +22,7 @@ void
 StateDoorOpened::open_door()
 {
     Logger::log("StateDoorOpened", "The door is already opened");
-    context_->reset_countdown();
+    countdown_->reset();
 }
 
 void
@@ -35,4 +36,10 @@ StateDoorOpened::close_door()
 {
     Logger::log("StateDoorOpened", "Closing door");
     context_->transition_to(StateDoorClosed::get_instance());
+}
+
+int
+StateDoorOpened::get_countdown() const
+{
+    return countdown_->get_time();
 }

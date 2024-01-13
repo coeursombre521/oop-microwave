@@ -4,6 +4,7 @@
 #include <string>
 
 #include <state_context.h>
+#include <microwave_countdown.h>
 
 class StateContext;
 
@@ -17,14 +18,16 @@ public:
     virtual void purge_state() = 0;
 
     virtual void open_door() = 0;
-    virtual void cook(int microwave_time = 30) = 0;
+    virtual void cook(int) = 0;
     virtual void close_door() = 0;
+    virtual int get_countdown() const = 0;
 
     std::string get_name() const;
     std::string get_description() const;
 
 protected:
     StateContext *context_;
+    MicrowaveCountdown *countdown_;
 
     std::string name_;
     std::string description_;

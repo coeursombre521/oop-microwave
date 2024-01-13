@@ -7,6 +7,7 @@
 
 StateDoorClosed::StateDoorClosed() : BaseState()
 {
+    countdown_ = MicrowaveCountdown::get_instance();
     name_ = "StateDoorClosed";
     description_ = "The microwave door is closed.";
 }
@@ -29,11 +30,11 @@ StateDoorClosed::cook(int microwave_time)
 {
     Logger::log("StateDoorClosed", "Cooking your mancarica");
     context_->transition_to(StateCooking::get_instance());
-    if (context_->get_countdown_time() > 0) {
-        context_->start_countdown(-1);
+    if (countdown_->get_time() > 0) {
+        countdown_->start(-1);
     }
     else {
-        context_->start_countdown(microwave_time);
+        countdown_->start(microwave_time);
     }
 }
 
@@ -41,4 +42,10 @@ void
 StateDoorClosed::close_door()
 {
     Logger::log("StateDoorClosed", "The door is closed already");
+}
+
+int
+StateDoorClosed::get_countdown() const
+{
+    return countdown_->get_time();
 }
