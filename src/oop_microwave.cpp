@@ -1,44 +1,47 @@
 
 #include <logger.h>
-#include <microwave_application.h>
+#include <microwave_application_builder.h>
+#include <interface_microwave_application.h>
+#include <microwave_gl_application.h>
 #include <microwave_ui.h>
+
+#include <config.h>
+
+static void error_callback(int, const char*);
 
 int
 main (void)
 {
     Logger::log("main", "Hello there, starting application");
 
-    MicrowaveApplication* tmp = MicrowaveApplication::get_instance();
-
-    tmp->init_opengl(3, 3);
-    tmp->create_window("cuptor cu microunde pofta buna", 1280, 720);
-    tmp->init_imgui();
-
-    GLFWwindow* window = tmp->window();
+    MicrowaveApplicationBuilder builder = MicrowaveApplicationBuilder();
     MicrowaveUI *ui = new MicrowaveUI();
-
-    tmp->run(
-        [&ui]() -> void {
+    IMicrowaveApplication *app = builder
+        .create_gl_application()
+        .set_window_title("cuptor cu microunde pofta buna youtube :)")
+        .set_window_width(WINDOW_WIDTH)
+        .set_window_height(WINDOW_HEIGHT)
+        .set_glsl_version(std::string(GLSL_VERSION))
+        .set_gl_major(GL_MAJOR)
+        .set_gl_minor(GL_MINOR)
+        .set_error_callback(error_callback)
+        .set_run_callback([&ui]() -> void {
             ui->render_ui();
-        },
-        [&window]() -> void {
-            int display_w, display_h;
-            glfwGetFramebufferSize(window, &display_w, &display_h);
-            glViewport(0, 0, display_w, display_h);
-            glClearColor(0.04, 0.1, 0.23, 1.0);
-            glClear(GL_COLOR_BUFFER_BIT);
+        })
+        .build();
 
-            ClockContext::get_instance()->update_time();
-        }
-    );
+    app->main_loop();
 
     delete ui;
     ui = nullptr;
 
-    tmp->destroy_context();
-    MicrowaveApplication::destroy_instance();
-
     Logger::log("main", "Bye bye");
 
     return 0;
+}
+
+static void
+error_callback(int error, const char* description)
+{
+    Logger::log("GLFW", "Error %d: %s", error, description);
 }

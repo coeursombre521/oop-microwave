@@ -39,7 +39,7 @@ MicrowaveUI::~MicrowaveUI() {
 void
 MicrowaveUI::render_ui()
 {
-    if (ImGui::Begin("Control cuptor cu microunde")) {
+    if (ImGui::Begin("Microwave control")) {
         ImGui::SetWindowSize(ImVec2(250, 300));
 
         ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "State:");
