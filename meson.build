@@ -38,18 +38,18 @@ imgui_dep = declare_dependency(include_directories: include_dirs, link_with: img
 deps = [ gl_dep, glew_dep, glfw_dep, imgui_dep ]
 
 sources = [
-    'src/base_state.cpp',
-    'src/clock.cpp',
-    'src/clock_context.cpp',
-    'src/microwave_application_builder.cpp',
-    'src/microwave_gl_application.cpp',
-    'src/microwave_countdown.cpp',
-    'src/microwave_ui.cpp',
-    'src/state_context.cpp',
-    'src/state_cooking.cpp',
-    'src/state_door_opened.cpp',
-    'src/state_door_closed.cpp',
-    'src/oop_microwave.cpp'
+    'src/app_impl/builder.cpp',
+    'src/app_impl/impl_gl.cpp',
+    'src/base_type/state.cpp',
+    'src/context/clock.cpp',
+    'src/context/countdown.cpp',
+    'src/context/state.cpp',
+    'src/entity/clock.cpp',
+    'src/state/cooking.cpp',
+    'src/state/door_closed.cpp',
+    'src/state/door_opened.cpp',
+    'src/ui/microwave_control.cpp',
+    'src/main.cpp'
 ]
 
 executable(
