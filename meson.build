@@ -11,7 +11,7 @@ project(
     ]
 )
 
-include_dirs = include_directories('.', './thirdparty/imgui', './include')
+include_dirs = include_directories('.', './thirdparty', './include')
 
 imgui_sources = [
     'thirdparty/imgui/imgui_demo.cpp',
