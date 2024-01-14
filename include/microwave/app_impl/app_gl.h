@@ -11,7 +11,7 @@
 
 #include <functional>
 
-#include <GLFW/glfw3.h>
+#include <gl_common.h>
 
 #include <imgui/imgui.h>
 #include <imgui/imgui_impl_glfw.h>
@@ -76,6 +76,7 @@ private:
 
     void init_glfw();
     void init_window();
+    void init_glad();
     void init_imgui();
     void destroy();
 };

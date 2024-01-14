@@ -9,6 +9,7 @@
 #ifndef __UI_MICROWAVE_CONTROL_H_
 #define __UI_MICROWAVE_CONTROL_H_
 
+#include <functional>
 #include <string>
 #include <sstream>
 
@@ -31,7 +32,6 @@ public:
     const float MC_WINDOW_HEIGHT = 360.0f;
     const float MC_DUMMY_OBJECT_HEIGHT = 10.0f;
     const float MC_STATE_DESCRIPTION_TEXT_HEIGHT = 60.0f;
-    const float MC_STATE_DESCRIPTION_WRAP_OFFSET = 10.0f;
 
     const std::string MC_CONTROL_TITLE = "Microwave control";
     const std::string MC_OPEN_DOOR_BUTTON = "Open door";
@@ -65,7 +65,8 @@ private:
     void draw_state_name(std::string state_name);
     void draw_state_description(std::string state_description);
     void draw_dummy_object();
-    void draw_countdown();
+    void draw_countdown_notice();
+    void draw_countdown_spinner();
     void draw_buttons();
 
     ClockContext* clock_context__;
@@ -77,6 +78,7 @@ private:
     long double elapsed_time__ = 0.0;
     long double last_elapsed_time = 0.0;
     int countdown__ = 0;
+    int countdown_spinner__ = MICROWAVE_DEFAULT_COUNTDOWN;
     bool countdown_running__ = false;
 };
 

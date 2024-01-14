@@ -15,12 +15,21 @@
 #include <microwave/state/door_opened.h>
 
 StateContext::StateContext()
-{ }
+{
+    countdown_context__ = CountdownContext::get_instance();
+    countdown_context__->register_observer(this);
+}
 
 StateContext::~StateContext() {
+    countdown_context__->unregister_observer(this);
+
     purge_state();
     observers__.clear();
 
+    if (CountdownContext::is_alive()) {
+        CountdownContext::destroy_instance();
+        countdown_context__ = nullptr;
+    }
     if (StateCooking::is_alive()) {
         StateCooking::destroy_instance();
     }
@@ -102,6 +111,19 @@ StateContext::notify_observers()
 {
     for (IObserver *observer : observers__) {
         observer->update(STATE_CONTEXT_NOTIFY_ID);
+    }
+}
+
+void
+StateContext::update(unsigned int notify_id)
+{
+    switch (notify_id)
+    {
+        case MICROWAVE_COUNTDOWN_NOTIFY_ID:
+            if (state__->get_countdown() == 0 && state__->get_name() == "StateCooking") {
+                open_door();
+            }
+            break;
     }
 }
 

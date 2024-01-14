@@ -52,6 +52,9 @@ GLFWApplication::init()
     Logger::log("GLFWApplication", "Initializing window");
     init_window();
 
+    Logger::log("GLFWApplication", "Initializing GLAD");
+    init_glad();
+
     Logger::log("GLFWApplication", "Initializing ImGui");
     init_imgui();
 
@@ -246,6 +249,8 @@ GLFWApplication::init_window()
     );
 
     if (glfw_window == nullptr) {
+        Logger::log("GLFWApplication", "Failed to create GLFW window");
+        glfwTerminate();
         throw std::runtime_error("Failed to create GLFW window");
     }
 
@@ -256,6 +261,20 @@ GLFWApplication::init_window()
     window__->set_glfw_window(glfw_window);
 
     print_app_info_to_log();
+}
+
+void
+GLFWApplication::init_glad()
+{
+    int version = gladLoadGL(glfwGetProcAddress);
+    if (version == 0) {
+        Logger::log("GLFWApplication", "Failed to initialize GLAD");
+        throw std::runtime_error("Failed to initialize GLAD");
+    }
+
+    Logger::log("GLFWApplication", "GLAD initialized successfully");
+    Logger::log("GLFWApplication", "Loaded OpenGL version: %d.%d", GLAD_VERSION_MAJOR(version), GLAD_VERSION_MINOR(version));
+
     print_gpu_info_to_log();
 }
 

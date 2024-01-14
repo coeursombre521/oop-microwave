@@ -24,7 +24,8 @@ class BaseState;
 
 class StateContext :
     public BaseSingleton<StateContext>,
-    public IObservable
+    public IObservable,
+    public IObserver
 {
 public:
     void transition_to(BaseState *state);
@@ -39,6 +40,8 @@ public:
     void unregister_observer(IObserver *observer) override;
     void notify_observers() override;
 
+    void update(unsigned int notify_id) override;
+
     std::string get_state_name() const;
     std::string get_state_description() const;
 
@@ -48,6 +51,7 @@ protected:
 
 private:
     BaseState *state__ = nullptr;
+    CountdownContext *countdown_context__ = nullptr;
     std::unordered_set<IObserver *> observers__;
 
     friend class BaseSingleton<StateContext>;

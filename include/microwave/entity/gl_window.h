@@ -11,7 +11,7 @@
 
 #include <string>
 
-#include <GLFW/glfw3.h>
+#include <gl_common.h>
 
 #include <microwave/interface/window.h>
 

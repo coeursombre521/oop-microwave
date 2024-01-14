@@ -13,7 +13,7 @@ MicrowaveGLScene::MicrowaveGLScene(IWindow *window) :
     display_width__(window->get_window_width()),
     display_height__(window->get_window_height())
 {
-    GLWindow *gl_window = dynamic_cast<GLWindow *>(window);
+    GLWindow *gl_window = dynamic_cast<GLWindow *>(window); // bruh
     if (gl_window == nullptr) {
         throw std::runtime_error("Failed to cast IWindow to GLWindow");
     }

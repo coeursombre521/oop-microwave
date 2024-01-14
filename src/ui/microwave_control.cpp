@@ -56,7 +56,9 @@ MicrowaveControl::render()
         draw_state_description(state_description__);
         draw_buttons();
         draw_dummy_object();
-        draw_countdown();
+        draw_countdown_spinner();
+        draw_dummy_object();
+        draw_countdown_notice();
     }
     ImGui::End();
 }
@@ -79,7 +81,7 @@ MicrowaveControl::cook_on()
     if (!countdown_running__) {
         last_elapsed_time = elapsed_time__;
     }
-    state_context__->cook();
+    state_context__->cook(countdown_spinner__);
 }
 
 void
@@ -139,11 +141,13 @@ MicrowaveControl::draw_state_description(std::string state_description)
 {
     ImGui::TextColored(MC_TEAL_COLOR, MC_STATE_DESCRIPTION_LABEL.c_str());
 
-    ImVec2 text_wrap_size = ImVec2(ImGui::GetWindowWidth() - MC_STATE_DESCRIPTION_WRAP_OFFSET, MC_STATE_DESCRIPTION_TEXT_HEIGHT);
-    ImGui::PushTextWrapPos(ImGui::GetCursorPos().x + text_wrap_size.x);
+    float content_width = ImGui::GetContentRegionAvail().x;
+    ImVec2 text_wrap_zone = ImVec2(content_width, MC_STATE_DESCRIPTION_TEXT_HEIGHT);
+    ImVec2 text_wrap_calc = ImGui::CalcTextSize(state_description.c_str(), NULL, true, text_wrap_zone.x);
+    ImGui::PushTextWrapPos(ImGui::GetCursorPos().x + text_wrap_zone.x);
     ImGui::Text("%s", state_description.c_str());
     ImGui::PopTextWrapPos();
-    ImGui::Dummy(ImVec2(0.0f, text_wrap_size.y - ImGui::CalcTextSize(state_description.c_str(), NULL, true, text_wrap_size.x).y));
+    ImGui::Dummy(ImVec2(0.0f, text_wrap_zone.y - text_wrap_calc.y));
 }
 
 void
@@ -153,9 +157,47 @@ MicrowaveControl::draw_dummy_object()
 }
 
 void
-MicrowaveControl::draw_countdown()
+MicrowaveControl::draw_countdown_notice()
 {
     ImGui::TextColored(countdown_running__ ? MC_YELLOW_COLOR : MC_WHITE_COLOR, get_countdown_notice().c_str());
+}
+
+void MicrowaveControl::draw_countdown_spinner() {
+    float window_width = ImGui::GetWindowSize().x;
+    float content_width = ImGui::GetContentRegionAvail().x;
+    float window_third = window_width / 3.0f;
+    float section_width = content_width / 3.0f - 2.0f;
+
+    auto drawButton = [&](const char* label, float width, std::function<void()> onClick, bool same_line = true) {
+        ImGui::PushItemWidth(width);
+        if (ImGui::Button(label, ImVec2(width, 0.0f))) {
+            onClick();
+        }
+        ImGui::PopItemWidth();
+        if (same_line) {
+            ImGui::SameLine();
+        }
+    };
+
+    drawButton("-", section_width, [&]() {
+        if (countdown_spinner__ > 0) {
+            countdown_spinner__--;
+        }
+    });
+
+    const std::string value_text = std::to_string(countdown_spinner__);
+    float text_width = ImGui::CalcTextSize(value_text.c_str()).x;
+    float offset = (window_width - text_width) / 2.0f;
+    if (offset > 0.0f) {
+        ImGui::SetCursorPosX(offset);
+    }
+    ImGui::Text("%d", countdown_spinner__);
+    ImGui::SameLine();
+    ImGui::SetCursorPosX(window_third * 2.0 - 2.0);
+
+    drawButton("+", section_width, [&]() {
+        countdown_spinner__++;
+    }, false);
 }
 
 void

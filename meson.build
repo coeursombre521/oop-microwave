@@ -41,7 +41,7 @@ imgui = library('imgui',
 
 glad = library('glad',
     glad_sources,
-    dependencies: [ gl_dep, glfw_dep, glew_dep ] ,
+    dependencies: [ gl_dep, glfw_dep ] ,
     include_directories: include_dirs
 )
 
@@ -49,7 +49,7 @@ imgui_dep = declare_dependency(include_directories: include_dirs, link_with: img
 
 glad_dep = declare_dependency(include_directories: include_dirs, link_with: glad)
 
-deps = [ gl_dep, glew_dep, glfw_dep, glad_dep, imgui_dep ]
+deps = [ gl_dep, glfw_dep, glad_dep, imgui_dep ]
 
 sources = [
     'src/app_impl/app_gl.cpp',
