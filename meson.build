@@ -3,11 +3,12 @@
 
 project(
     'OopMicrowave',
-    'cpp',
-    version: '0.1',
+    ['cpp', 'c'],
+    version: '0.2',
     default_options: [
         'warning_level=3',
-        'cpp_std=c++20'
+        'cpp_std=c++20',
+        'c_std=c18'
     ]
 )
 
@@ -23,6 +24,11 @@ imgui_sources = [
     'thirdparty/imgui/imgui.cpp'
 ]
 
+glad_sources = [
+    'thirdparty/src/glad/gl.c',
+    'thirdparty/src/glad/vulkan.c'
+]
+
 glfw_dep = dependency('glfw3', required: true)
 glew_dep = dependency('glew', required: true)
 gl_dep = dependency('gl', required: true)
@@ -33,24 +39,38 @@ imgui = library('imgui',
     include_directories: include_dirs
 )
 
+glad = library('glad',
+    glad_sources,
+    dependencies: [ gl_dep, glfw_dep, glew_dep ] ,
+    include_directories: include_dirs
+)
+
 imgui_dep = declare_dependency(include_directories: include_dirs, link_with: imgui)
 
-deps = [ gl_dep, glew_dep, glfw_dep, imgui_dep ]
+glad_dep = declare_dependency(include_directories: include_dirs, link_with: glad)
+
+deps = [ gl_dep, glew_dep, glfw_dep, glad_dep, imgui_dep ]
 
 sources = [
     'src/app_impl/app_gl.cpp',
     'src/app_impl/builder.cpp',
+
     'src/base_type/state.cpp',
+
     'src/context/clock.cpp',
     'src/context/countdown.cpp',
     'src/context/state.cpp',
+
     'src/entity/gl_window.cpp',
     'src/entity/clock.cpp',
+
     'src/state/cooking.cpp',
     'src/state/door_closed.cpp',
     'src/state/door_opened.cpp',
+
     'src/ui/microwave_control.cpp',
     'src/ui/microwave_gl_scene.cpp',
+
     'src/main.cpp'
 ]
 

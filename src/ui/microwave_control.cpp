@@ -49,48 +49,14 @@ void
 MicrowaveControl::render()
 {
     if (ImGui::Begin("Microwave control")) {
-        ImGui::SetWindowSize(ImVec2(250, 300));
+        ImGui::SetWindowSize(ImVec2(MC_WINDOW_WIDTH, MC_WINDOW_HEIGHT));
 
-        ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "State:");
-        ImGui::Text("%s", state_name__.c_str());
-
-        ImGui::Dummy(ImVec2(0.0f, 10.0f));
-
-        ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "State description:");
-
-        ImVec2 description_size = ImVec2(ImGui::GetWindowWidth() - 10.0f, 40.0f);
-        const std::string description = state_description__;
-
-        ImGui::PushTextWrapPos(ImGui::GetCursorPos().x + description_size.x);
-        ImGui::Text("%s", description.c_str());
-        ImGui::PopTextWrapPos();
-
-        ImGui::Dummy(ImVec2(0.0f, description_size.y - ImGui::CalcTextSize(description.c_str(), NULL, true, description_size.x).y));
-
-        if (ImGui::Button("Open door", ImVec2(-1.0f, 0.0f))) {
-            open_door();
-        }
-
-        if (ImGui::Button("Close door", ImVec2(-1.0f, 0.0f))) {
-            close_door();
-        }
-
-        if (ImGui::Button("Cook mancarica", ImVec2(-1.0f, 0.0f))) {
-            cook_on();
-        }
-
-        if (ImGui::Button("Stop cooking", ImVec2(-1.0f, 0.0f))) {
-            cook_off();
-        }
-
-        ImGui::Dummy(ImVec2(0.0f, 10.0f));
-
-        if (countdown_running__) {
-            ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), get_countdown_notice().c_str());
-        }
-        else {
-            ImGui::Text("%s", get_countdown_notice().c_str());
-        }
+        draw_state_name(state_name__);
+        draw_dummy_object();
+        draw_state_description(state_description__);
+        draw_buttons();
+        draw_dummy_object();
+        draw_countdown();
     }
     ImGui::End();
 }
@@ -159,6 +125,57 @@ MicrowaveControl::get_countdown_notice() const
         ss << "Not cooking yet.";
     }
     return ss.str();
+}
+
+void
+MicrowaveControl::draw_state_name(std::string state_name)
+{
+    ImGui::TextColored(MC_TEAL_COLOR, MC_STATE_LABEL.c_str());
+    ImGui::Text("%s", state_name.c_str());
+}
+
+void
+MicrowaveControl::draw_state_description(std::string state_description)
+{
+    ImGui::TextColored(MC_TEAL_COLOR, MC_STATE_DESCRIPTION_LABEL.c_str());
+
+    ImVec2 text_wrap_size = ImVec2(ImGui::GetWindowWidth() - MC_STATE_DESCRIPTION_WRAP_OFFSET, MC_STATE_DESCRIPTION_TEXT_HEIGHT);
+    ImGui::PushTextWrapPos(ImGui::GetCursorPos().x + text_wrap_size.x);
+    ImGui::Text("%s", state_description.c_str());
+    ImGui::PopTextWrapPos();
+    ImGui::Dummy(ImVec2(0.0f, text_wrap_size.y - ImGui::CalcTextSize(state_description.c_str(), NULL, true, text_wrap_size.x).y));
+}
+
+void
+MicrowaveControl::draw_dummy_object()
+{
+    ImGui::Dummy(ImVec2(0.0f, MC_DUMMY_OBJECT_HEIGHT));
+}
+
+void
+MicrowaveControl::draw_countdown()
+{
+    ImGui::TextColored(countdown_running__ ? MC_YELLOW_COLOR : MC_WHITE_COLOR, get_countdown_notice().c_str());
+}
+
+void
+MicrowaveControl::draw_buttons()
+{
+    if (ImGui::Button(MC_OPEN_DOOR_BUTTON.c_str(), ImVec2(-1.0f, 0.0f))) {
+        open_door();
+    }
+
+    if (ImGui::Button(MC_CLOSE_DOOR_BUTTON.c_str(), ImVec2(-1.0f, 0.0f))) {
+        close_door();
+    }
+
+    if (ImGui::Button(MC_COOK_ON_BUTTON.c_str(), ImVec2(-1.0f, 0.0f))) {
+        cook_on();
+    }
+
+    if (ImGui::Button(MC_COOK_OFF_BUTTON.c_str(), ImVec2(-1.0f, 0.0f))) {
+        cook_off();
+    }
 }
 
 /* EOF */

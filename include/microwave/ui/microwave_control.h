@@ -27,6 +27,26 @@ class MicrowaveControl :
     public IObserver
 {
 public:
+    const float MC_WINDOW_WIDTH = 250.0f;
+    const float MC_WINDOW_HEIGHT = 360.0f;
+    const float MC_DUMMY_OBJECT_HEIGHT = 10.0f;
+    const float MC_STATE_DESCRIPTION_TEXT_HEIGHT = 60.0f;
+    const float MC_STATE_DESCRIPTION_WRAP_OFFSET = 10.0f;
+
+    const std::string MC_CONTROL_TITLE = "Microwave control";
+    const std::string MC_OPEN_DOOR_BUTTON = "Open door";
+    const std::string MC_CLOSE_DOOR_BUTTON = "Close door";
+    const std::string MC_COOK_ON_BUTTON = "Start cooking";
+    const std::string MC_COOK_OFF_BUTTON = "Stop cooking";
+    const std::string MC_STATE_LABEL = "State:";
+    const std::string MC_STATE_DESCRIPTION_LABEL = "State description:";
+
+    const ImVec4 MC_TEAL_COLOR = ImVec4(0.0f, 1.0f, 1.0f, 1.0f);
+    const ImVec4 MC_RED_COLOR = ImVec4(1.0f, 0.0f, 0.0f, 1.0f);
+    const ImVec4 MC_GREEN_COLOR = ImVec4(0.0f, 1.0f, 0.0f, 1.0f);
+    const ImVec4 MC_YELLOW_COLOR = ImVec4(1.0f, 1.0f, 0.0f, 1.0f);
+    const ImVec4 MC_WHITE_COLOR = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
+
     MicrowaveControl();
     ~MicrowaveControl();
 
@@ -41,6 +61,12 @@ public:
 
 private:
     std::string get_countdown_notice() const;
+
+    void draw_state_name(std::string state_name);
+    void draw_state_description(std::string state_description);
+    void draw_dummy_object();
+    void draw_countdown();
+    void draw_buttons();
 
     ClockContext* clock_context__;
     StateContext* state_context__;
