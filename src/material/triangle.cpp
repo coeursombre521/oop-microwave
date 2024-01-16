@@ -12,9 +12,9 @@
 void
 TriangleMaterial::set_custom_color(double r, double g, double b, double a)
 {
-    GLint color_location = glGetUniformLocation(program__, "custom_color");
+    GLint color_location = glGetUniformLocation(program__, "uv4_custom_color");
     if (color_location == -1) {
-        Logger::log("TriangleMaterial", "Failed to get uniform location for custom_color");
+        Logger::log("TriangleMaterial", "Failed to get uniform location");
         return;
     }
 

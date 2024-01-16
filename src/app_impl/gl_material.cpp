@@ -52,7 +52,7 @@ GLMaterial::compile()
     compile_vertex_shader();
     compile_fragment_shader();
 
-    glLinkProgram(program__);
+    is_linked__ = link_program();
 
     glDeleteShader(gshader__);
     glDeleteShader(vshader__);
@@ -91,49 +91,30 @@ GLMaterial::set_fragment_shader_source(const std::string &path)
 bool
 GLMaterial::compile_geometry_shader()
 {
-    if (gshader_src__.empty() || gs_path__.empty()) {
-        return false;
-    }
-
-    if (compile_shader(gshader__, &gshader_src__[0], gs_path__)) {
+    if (compile_shader(gshader__, gshader_src__, gs_path__, is_compiled_gshader__)) {
         glAttachShader(program__, gshader__);
-        is_compiled_gshader__ = true;
         return true;
     }
-
-    is_compiled_gshader__ = true;
     return false;
 }
 
 bool
 GLMaterial::compile_vertex_shader()
 {
-    if (vshader_src__.empty() || vs_path__.empty()) {
-        return false;
-    }
-
-    if (compile_shader(vshader__, &vshader_src__[0], vs_path__)) {
+    if (compile_shader(vshader__, vshader_src__, vs_path__, is_compiled_vshader__)) {
         glAttachShader(program__, vshader__);
         return true;
     }
-
-    is_compiled_vshader__ = true;
     return false;
 }
 
 bool
 GLMaterial::compile_fragment_shader()
 {
-    if (fshader_src__.empty() || fs_path__.empty()) {
-        return false;
-    }
-
-    if (compile_shader(fshader__, &fshader_src__[0], fs_path__)) {
+    if (compile_shader(fshader__, fshader_src__, fs_path__, is_compiled_fshader__)) {
         glAttachShader(program__, fshader__);
         return true;
     }
-
-    is_compiled_fshader__ = true;
     return false;
 }
 
@@ -144,8 +125,13 @@ GLMaterial::get_program() const
 }
 
 GLuint
-GLMaterial::compile_shader(GLuint &shader, char *buffer, std::string path)
+GLMaterial::compile_shader(GLuint &shader, std::string source, std::string path, bool &compiled)
 {
+    if (source.empty() || path.empty()) {
+        return 0;
+    }
+
+    const char *buffer = source.c_str();
     glShaderSource(shader, 1, &buffer, NULL);
     glCompileShader(shader);
 
@@ -162,9 +148,36 @@ GLMaterial::compile_shader(GLuint &shader, char *buffer, std::string path)
         while (std::getline(iss, line)) {
             Logger::log("GLMaterial", "%s", line.c_str());
         }
+        compiled = false;
     }
     else {
         Logger::log("GLMaterial", "Shader compiled successfully (%s)", path.c_str());
+        compiled = true;
+    }
+
+    return success;
+}
+
+GLint
+GLMaterial::link_program()
+{
+    glLinkProgram(program__);
+
+    GLint success;
+    glGetProgramiv(program__, GL_LINK_STATUS, &success);
+
+    if (!success) {
+        GLchar info_log[512];
+        glGetProgramInfoLog(program__, 512, NULL, info_log);
+        Logger::log("GLMaterial", "Failed to link shader program:");
+        std::istringstream iss(info_log);
+        std::string line;
+        while (std::getline(iss, line)) {
+            Logger::log("GLMaterial", "%s", line.c_str());
+        }
+    }
+    else {
+        Logger::log("GLMaterial", "Shader program linked successfully");
     }
 
     return success;

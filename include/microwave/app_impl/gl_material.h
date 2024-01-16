@@ -58,9 +58,12 @@ protected:
     bool is_compiled_vshader__ = false;
     bool is_compiled_fshader__ = false;
 
+    GLint is_linked__ = false;
+
 private:
+    GLuint compile_shader(GLuint &shader, std::string buffer, std::string path, bool &compiled);
+    GLint link_program();
     std::string get_shader_source(const std::string &path);
-    GLuint compile_shader(GLuint &shader, char *buffer, std::string path);
 };
 
 #endif

@@ -32,11 +32,12 @@ MicrowaveGLScene::~MicrowaveGLScene()
 void
 MicrowaveGLScene::render()
 {
-    // clear the screen
     glfwGetFramebufferSize(glfw_window__, &display_width__, &display_height__);
     glViewport(0, 0, display_width__, display_height__);
     glClearColor(0.0, 0.067, 0.239, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    triangle__->draw();
 }
 
 /* EOF */
