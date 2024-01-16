@@ -19,7 +19,7 @@ class ApplicationBuilder
 {
 public:
     ApplicationBuilder();
-    ~ApplicationBuilder();
+    virtual ~ApplicationBuilder();
 
     ApplicationBuilder& create_gl_application();
 

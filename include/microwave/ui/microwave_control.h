@@ -48,7 +48,7 @@ public:
     const ImVec4 MC_WHITE_COLOR = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
 
     MicrowaveControl();
-    ~MicrowaveControl();
+    virtual ~MicrowaveControl();
 
     void render() override;
 

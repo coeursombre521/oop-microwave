@@ -21,7 +21,7 @@ class MicrowaveGLScene :
 {
 public:
     MicrowaveGLScene(IWindow *window);
-    ~MicrowaveGLScene();
+    virtual ~MicrowaveGLScene();
 
     void render() override;
 

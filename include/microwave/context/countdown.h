@@ -41,7 +41,7 @@ public:
 
 protected:
     CountdownContext() { }
-    ~CountdownContext();
+    virtual ~CountdownContext();
 
 private:
     std::unordered_set<IObserver *> observers__;

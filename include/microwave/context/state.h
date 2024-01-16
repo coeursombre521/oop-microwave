@@ -47,7 +47,7 @@ public:
 
 protected:
     StateContext();
-    ~StateContext();
+    virtual ~StateContext();
 
 private:
     BaseState *state__ = nullptr;

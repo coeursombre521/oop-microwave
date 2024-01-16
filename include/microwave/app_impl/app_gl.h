@@ -27,7 +27,7 @@ class GLFWApplication :
 {
 public:
     GLFWApplication();
-    ~GLFWApplication();
+    virtual ~GLFWApplication();
 
     using error_callback_t = void(*)(int, const char *);
     using run_callback_t = std::function<void()>;

@@ -20,7 +20,7 @@ class GLWindow :
 {
 public:
     GLWindow(GLFWwindow *window, const std::string &title, int width, int height);
-    ~GLWindow();
+    virtual ~GLWindow();
 
     void set_window_title(const std::string &title) override;
     void set_window_width(int w) override;

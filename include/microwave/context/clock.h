@@ -38,7 +38,7 @@ public:
 
 protected:
     ClockContext();
-    ~ClockContext();
+    virtual ~ClockContext();
 
 private:
     std::unordered_set<IObserver *> observers__;

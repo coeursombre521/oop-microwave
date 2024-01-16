@@ -82,7 +82,7 @@ public:
 
 protected:
     BaseSingleton() = default;
-    ~BaseSingleton() = default;
+    virtual ~BaseSingleton() = default;
 
 private:
     static std::atomic<T*>      instance__;
