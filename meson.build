@@ -54,6 +54,7 @@ deps = [ gl_dep, glfw_dep, glad_dep, imgui_dep ]
 sources = [
     'src/app_impl/app_gl.cpp',
     'src/app_impl/builder.cpp',
+    'src/app_impl/gl_camera.cpp',
     'src/app_impl/gl_material.cpp',
     'src/app_impl/gl_model.cpp',
 
@@ -66,6 +67,7 @@ sources = [
     'src/entity/gl_window.cpp',
     'src/entity/clock.cpp',
 
+    'src/material/camera_view.cpp',
     'src/material/triangle.cpp',
 
     'src/model/triangle.cpp',

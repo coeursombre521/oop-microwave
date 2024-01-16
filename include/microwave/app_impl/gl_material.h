@@ -41,29 +41,27 @@ public:
     GLuint get_program() const;
 
 protected:
-    std::string gshader_src__;
-    std::string vshader_src__;
-    std::string fshader_src__;
+    GLint get_uniform_location(const std::string &name);
 
-    std::string gs_path__;
-    std::string vs_path__;
-    std::string fs_path__;
+    std::string gshader_src_;
+    std::string vshader_src_;
+    std::string fshader_src_;
 
-    GLuint program__;
-    GLuint gshader__;
-    GLuint vshader__;
-    GLuint fshader__;
+    std::string gs_path_;
+    std::string vs_path_;
+    std::string fs_path_;
 
-    bool is_compiled_gshader__ = false;
-    bool is_compiled_vshader__ = false;
-    bool is_compiled_fshader__ = false;
+    GLuint program_;
+    GLuint gshader_;
+    GLuint vshader_;
+    GLuint fshader_;
 
-    GLint is_linked__ = false;
+    GLint is_linked_ = false;
 
 private:
-    GLuint compile_shader(GLuint &shader, std::string buffer, std::string path, bool &compiled);
-    GLint link_program();
     std::string get_shader_source(const std::string &path);
+    GLuint compile_shader(GLuint &shader, std::string buffer, std::string path);
+    GLint link_program();
 };
 
 #endif

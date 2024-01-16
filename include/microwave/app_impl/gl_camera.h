@@ -11,6 +11,7 @@
 
 #include <gl_common.h>
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include <microwave/interface/camera.h>
 
@@ -49,6 +50,8 @@ public:
     glm::mat4 get_view_matrix() const;
 
 private:
+    void update_camera_vectors();
+
     glm::vec3 position__;
     glm::vec3 front__;
     glm::vec3 up__;

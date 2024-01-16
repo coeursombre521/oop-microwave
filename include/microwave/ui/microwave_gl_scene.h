@@ -11,8 +11,10 @@
 
 #include <stdexcept>
 
-#include <GLFW/glfw3.h>
+#include <gl_common.h>
 
+#include <microwave/app_impl/gl_camera.h>
+#include <microwave/material/camera_view.h>
 #include <microwave/model/triangle.h>
 #include <microwave/interface/ui.h>
 #include <microwave/interface/window.h>
@@ -21,6 +23,8 @@ class MicrowaveGLScene :
     public IApplicationUI
 {
 public:
+    const std::string CAMERA_VIEW_VERTEX_SHADER_PATH = "assets/world/camera.vs";
+
     MicrowaveGLScene(IWindow *window);
     virtual ~MicrowaveGLScene();
 
@@ -31,6 +35,8 @@ private:
     int display_width__;
     int display_height__;
 
+    GLCamera *camera__;
+    CameraViewMaterial *camera_view__;
     TriangleModel *triangle__;
 };
 

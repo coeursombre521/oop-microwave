@@ -33,7 +33,7 @@ TriangleModel::init()
 
     material__ = new TriangleMaterial();
 
-    material__->set_vertex_shader_source("assets/models/triangle.vs");
+    // material__->set_vertex_shader_source("assets/models/triangle.vs");
     material__->set_fragment_shader_source("assets/models/triangle.fs");
 
     material__->init();

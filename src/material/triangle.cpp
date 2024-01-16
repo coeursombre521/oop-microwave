@@ -3,7 +3,7 @@
  * Copyright (c) 2024, noir51
  * SPDX-License-Identifier: GPL-3.0-or-later
  *
- * Path: model/triangle.cpp
+ * Path: material/triangle.cpp
  */
 
 #include <microwave/debug/logger.h>
@@ -12,7 +12,7 @@
 void
 TriangleMaterial::set_custom_color(double r, double g, double b, double a)
 {
-    GLint color_location = glGetUniformLocation(program__, "uv4_custom_color");
+    GLint color_location = glGetUniformLocation(program_, "uv4_custom_color");
     if (color_location == -1) {
         Logger::log("TriangleMaterial", "Failed to get uniform location");
         return;
