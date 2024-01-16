@@ -13,6 +13,7 @@
 
 #include <GLFW/glfw3.h>
 
+#include <microwave/model/triangle.h>
 #include <microwave/interface/ui.h>
 #include <microwave/interface/window.h>
 
@@ -29,6 +30,8 @@ private:
     GLFWwindow *glfw_window__;
     int display_width__;
     int display_height__;
+
+    TriangleModel *triangle__;
 };
 
 #endif

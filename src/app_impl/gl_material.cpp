@@ -62,7 +62,9 @@ GLMaterial::compile()
 void
 GLMaterial::use()
 {
-    glUseProgram(program__);
+    if (is_compiled_fshader__ || is_compiled_vshader__) {
+        glUseProgram(program__);
+    }
 }
 
 void
@@ -93,10 +95,13 @@ GLMaterial::compile_geometry_shader()
         return false;
     }
 
-    if (compile_shader(gshader__, &gshader_src__[0], gshader_src__.size(), gs_path__)) {
+    if (compile_shader(gshader__, &gshader_src__[0], gs_path__)) {
         glAttachShader(program__, gshader__);
+        is_compiled_gshader__ = true;
         return true;
     }
+
+    is_compiled_gshader__ = true;
     return false;
 }
 
@@ -107,10 +112,13 @@ GLMaterial::compile_vertex_shader()
         return false;
     }
 
-    if (compile_shader(vshader__, &vshader_src__[0], vshader_src__.size(), vs_path__)) {
+    if (compile_shader(vshader__, &vshader_src__[0], vs_path__)) {
         glAttachShader(program__, vshader__);
         return true;
     }
+
+    is_compiled_vshader__ = true;
+    return false;
 }
 
 bool
@@ -120,14 +128,23 @@ GLMaterial::compile_fragment_shader()
         return false;
     }
 
-    if (compile_shader(fshader__, &fshader_src__[0], fshader_src__.size(), fs_path__)) {
+    if (compile_shader(fshader__, &fshader_src__[0], fs_path__)) {
         glAttachShader(program__, fshader__);
         return true;
     }
+
+    is_compiled_fshader__ = true;
+    return false;
 }
 
 GLuint
-GLMaterial::compile_shader(GLuint &shader, char *buffer, size_t buffer_size, std::string path)
+GLMaterial::get_program() const
+{
+    return program__;
+}
+
+GLuint
+GLMaterial::compile_shader(GLuint &shader, char *buffer, std::string path)
 {
     glShaderSource(shader, 1, &buffer, NULL);
     glCompileShader(shader);

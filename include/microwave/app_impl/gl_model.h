@@ -27,7 +27,7 @@ public:
     GLModel(const GLfloat *vertices, const size_t vertices_size, const GLuint *indices, const size_t indices_size);
     virtual ~GLModel();
 
-    void init() override;
+    virtual void init() override;
     virtual void draw() = 0;
 
     GLenum get_usage() const;

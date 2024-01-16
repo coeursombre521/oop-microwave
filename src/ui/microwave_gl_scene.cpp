@@ -6,6 +6,7 @@
  * Path: ui/microwave_scene.cpp
  */
 
+#include <microwave/debug/logger.h>
 #include <microwave/entity/gl_window.h>
 #include <microwave/ui/microwave_gl_scene.h>
 
@@ -18,6 +19,9 @@ MicrowaveGLScene::MicrowaveGLScene(IWindow *window) :
         throw std::runtime_error("Failed to cast IWindow to GLWindow");
     }
     glfw_window__ = gl_window->get_glfw_window();
+
+    triangle__ = new TriangleModel(-0.5f, -0.5f, 0.5f, -0.5f, 0.0f, 0.5f);
+    triangle__->init();
 }
 
 MicrowaveGLScene::~MicrowaveGLScene()

@@ -21,10 +21,30 @@ TriangleModel::TriangleModel(float x1, float y1, float x2, float y2, float x3, f
     };
 }
 
+TriangleModel::~TriangleModel()
+{
+    delete material__;
+}
+
+void
+TriangleModel::init()
+{
+    GLModel::init();
+
+    material__ = new TriangleMaterial();
+
+    material__->set_vertex_shader_source("assets/models/triangle.vs");
+    material__->set_fragment_shader_source("assets/models/triangle.fs");
+
+    material__->init();
+    material__->compile();
+}
+
 void
 TriangleModel::draw()
 {
-    material__.use();
+    material__->use();
+    material__->set_custom_color(0.0f, 0.0f, 1.0f, 1.0f);
     glBindVertexArray(vao__);
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);

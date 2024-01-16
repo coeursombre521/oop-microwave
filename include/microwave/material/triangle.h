@@ -16,6 +16,8 @@
 class TriangleMaterial :
     public GLMaterial
 {
+public:
+    void set_custom_color(double r, double g, double b, double a);
 };
 
 #endif

@@ -39,9 +39,6 @@ public:
     bool compile_fragment_shader() override;
 
     GLuint get_program() const;
-    GLuint get_geometry_shader() const;
-    GLuint get_vertex_shader() const;
-    GLuint get_fragment_shader() const;
 
 protected:
     std::string gshader_src__;
@@ -57,9 +54,13 @@ protected:
     GLuint vshader__;
     GLuint fshader__;
 
+    bool is_compiled_gshader__ = false;
+    bool is_compiled_vshader__ = false;
+    bool is_compiled_fshader__ = false;
+
 private:
     std::string get_shader_source(const std::string &path);
-    GLuint compile_shader(GLuint &shader, char *buffer, size_t buffer_size, std::string path);
+    GLuint compile_shader(GLuint &shader, char *buffer, std::string path);
 };
 
 #endif

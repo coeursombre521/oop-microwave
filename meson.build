@@ -54,6 +54,8 @@ deps = [ gl_dep, glfw_dep, glad_dep, imgui_dep ]
 sources = [
     'src/app_impl/app_gl.cpp',
     'src/app_impl/builder.cpp',
+    'src/app_impl/gl_material.cpp',
+    'src/app_impl/gl_model.cpp',
 
     'src/base_type/state.cpp',
 
@@ -63,6 +65,10 @@ sources = [
 
     'src/entity/gl_window.cpp',
     'src/entity/clock.cpp',
+
+    'src/material/triangle.cpp',
+
+    'src/model/triangle.cpp',
 
     'src/state/cooking.cpp',
     'src/state/door_closed.cpp',

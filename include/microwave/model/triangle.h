@@ -19,11 +19,13 @@ class TriangleModel :
 {
 public:
     TriangleModel(float x1, float y1, float x2, float y2, float x3, float y3);
+    virtual ~TriangleModel();
 
+    void init() override;
     void draw() override;
 
 private:
-    TriangleMaterial material__;
+    TriangleMaterial *material__;
 };
 
 #endif
