@@ -2,10 +2,10 @@
 
 layout (location = 0) in vec3 attr_pos;
 
-out vec4 uv4_custom_color;
-
 void
 main()
 {
-    gl_Position = vec4(attr_pos.x * 0.5, attr_pos.y, attr_pos.z, 1.0);
+    // translate to the top left corner a bit
+    vec3 tr_pos = attr_pos;
+    gl_Position = vec4(tr_pos.x, tr_pos.y, tr_pos.z, 1.0);
 }

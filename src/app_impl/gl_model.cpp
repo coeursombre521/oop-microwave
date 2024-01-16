@@ -79,6 +79,17 @@ GLModel::set_vertices(const GLfloat *varray, const size_t size)
 }
 
 void
+GLModel::set_vertices(const glm::vec3 *varray, const size_t size)
+{
+    vertices.resize(size * 3);
+    for (size_t i = 0; i < size; i++) {
+        vertices[i * 3 + 0] = varray[i].x;
+        vertices[i * 3 + 1] = varray[i].y;
+        vertices[i * 3 + 2] = varray[i].z;
+    }
+}
+
+void
 GLModel::set_indices(const gl_indices_list_t &ilist)
 {
     indices = ilist;

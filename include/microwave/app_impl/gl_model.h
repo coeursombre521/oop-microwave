@@ -12,6 +12,7 @@
 #include <vector>
 
 #include <gl_common.h>
+#include <glm/glm.hpp>
 
 #include <microwave/interface/model.h>
 
@@ -35,6 +36,7 @@ public:
 
     void set_vertices(const gl_vertices_list_t &vertices);
     void set_vertices(const GLfloat *vertices, const size_t size);
+    void set_vertices(const glm::vec3 *vertices, const size_t size);
 
     void set_indices(const gl_indices_list_t &indices);
     void set_indices(const GLuint *indices, const size_t size);

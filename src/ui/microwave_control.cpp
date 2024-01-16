@@ -99,7 +99,9 @@ MicrowaveControl::update(unsigned int notify_id)
             elapsed_time__ = clock_context__->get_elapsed_time();
             if (elapsed_time__ - last_elapsed_time >= 1.0) {
                 last_elapsed_time = elapsed_time__;
-                microwave_countdown__->update();
+                if (microwave_countdown__->is_alive()) {
+                    microwave_countdown__->update();
+                }
             }
             break;
         case STATE_CONTEXT_NOTIFY_ID:
