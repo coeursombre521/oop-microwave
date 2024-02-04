@@ -30,12 +30,11 @@ glad_sources = [
 ]
 
 glfw_dep = dependency('glfw3', required: true)
-glew_dep = dependency('glew', required: true)
 gl_dep = dependency('gl', required: true)
 
 imgui = library('imgui',
     imgui_sources,
-    dependencies: [ gl_dep, glfw_dep, glew_dep ] ,
+    dependencies: [ gl_dep, glfw_dep ] ,
     include_directories: include_dirs
 )
 
