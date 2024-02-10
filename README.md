@@ -7,20 +7,6 @@ This is a C++ application that simulates a microwave using object-oriented progr
 - **State**: This pattern allows an object to alter its behavior when its internal state changes. The object will appear to change its class. In this application, the microwave cycles through different states: `StateDoorOpened`, `StateDoorClosed`, and `StateCooking`.
 - **Observer**: This pattern defines a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically. In this application, the `CountdownContext` class notifies the current state when the countdown changes.
 
-## Folder structure
-
-# oop_microwave
-
-This is a C++ application that simulates a microwave using object-oriented programming principles. It implements design patterns such as Singleton, State, and Observer. The application is built using C++, Meson, and GLFW with ImGui for its user interface.
-
-## Design Patterns
-
-- **Singleton**: This pattern ensures that a class has only one instance and provides a global point of access to it. In this application, the `CountdownContext` class is implemented as a Singleton.
-
-- **State**: This pattern allows an object to alter its behavior when its internal state changes. The object will appear to change its class. In this application, the microwave cycles through different states: `StateDoorOpened`, `StateDoorClosed`, and `StateCooking`.
-
-- **Observer**: This pattern defines a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically. In this application, the `CountdownContext` class notifies the current state when the countdown changes.
-
 ## Folder Structure
 
 - `src/`: Contains the source code of the application.
