@@ -36,12 +36,7 @@ This is a C++ application that simulates a microwave using object-oriented progr
 
 ## Installation
 
-1. Clone the repository:
-
-    ```bash
-    git clone https://github.com/your-username/oop_microwave.git
-    ```
-
+1. Clone the repository.
 2. Build the project using Meson:
 
     ```bash
