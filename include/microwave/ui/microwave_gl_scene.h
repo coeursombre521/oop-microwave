@@ -34,10 +34,6 @@ private:
     GLFWwindow *glfw_window__;
     int display_width__;
     int display_height__;
-
-    GLCamera *camera__;
-    CameraViewMaterial *camera_view__;
-    TriangleModel *triangle__;
 };
 
 #endif
